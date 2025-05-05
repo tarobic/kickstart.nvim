@@ -98,6 +98,50 @@ return {
       },
     }
 
+    dap.adapters['local-lua'] = {
+      type = 'executable',
+      command = 'node',
+      args = {
+        '/home/tarobic/software/local-lua-debugger-vscode/extension/debugAdapter.js',
+      },
+      enrich_config = function(config, on_config)
+        if not config['extensionPath'] then
+          local c = vim.deepcopy(config)
+          c.extensionPath = '/home/tarobic/software/local-lua-debugger-vscode/'
+          on_config(c)
+        else
+          on_config(config)
+        end
+      end,
+    }
+    dap.configurations.lua = {
+      {
+        name = 'Current file (local-lua-dbg, lua)',
+        type = 'local-lua',
+        request = 'launch',
+        cwd = '${workspaceFolder}',
+        program = {
+          lua = 'lua',
+          file = '${file}',
+        },
+        args = {},
+      },
+    }
+
+    dap.adapters.godot = {
+      type = 'server',
+      host = '127.0.0.1',
+      port = 6006,
+    }
+    dap.configurations.gdscript = {
+      {
+        type = 'godot',
+        request = 'launch',
+        name = 'Launch scene',
+        project = '${workspaceFolder}',
+      },
+    }
+
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
