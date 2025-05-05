@@ -1,8 +1,5 @@
 vim.g.have_nerd_font = true
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- [[ Setting options ]]
+--
 vim.opt.number = true
 vim.opt.mouse = 'a'
 vim.opt.breakindent = true

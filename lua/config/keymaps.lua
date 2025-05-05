@@ -1,3 +1,6 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -35,7 +38,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
-vim.keymap.set('n', '<leader>c', '<C-w>q', { desc = 'Close window' })
+vim.keymap.set('n', '<leader>c', '<C-w>q', { desc = 'Quit window' })
 
 vim.keymap.set('n', '-', function()
   local reveal_file = vim.fn.expand '%:p'
@@ -56,4 +59,4 @@ vim.keymap.set('n', '-', function()
     reveal_file = reveal_file, -- path to file or folder to reveal
     reveal_force_cwd = true, -- change cwd without asking if needed
   }
-end, { desc = 'Open neo-tree at current file or working directory' })
+end, { desc = 'Open Neotree at current file or working directory' })

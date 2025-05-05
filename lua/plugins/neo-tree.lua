@@ -12,16 +12,7 @@ return {
   lazy = false,
   cmd = 'Neotree',
   keys = {
-    { '<leader>e', ':Neotree toggle reveal_force_cwd<CR>', desc = 'NeoTree toggle', silent = true },
-    { '<leader>o', ':Neotree focus<CR>', desc = 'Neotree focus', silent = true },
+    { '<leader>e', ':Neotree toggle reveal_force_cwd<CR>', desc = 'Toggle NeoTree', silent = true },
+    { '<leader>o', ':Neotree focus<CR>', desc = 'Focus Neotree', silent = true },
   },
-  -- opts = {
-  --   filesystem = {
-  --     window = {
-  --       mappings = {
-  --         ['<leader>\\'] = 'close_window',
-  --       },
-  --     },
-  --   },
-  -- },
 }

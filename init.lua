@@ -1,6 +1,5 @@
 require 'config.keymaps'
 require 'config.options'
-require 'config.lazy'
 require 'config.colorscheme'
--- require 'config.lsp-config'
--- require 'config.debug'
+require 'config.lazy'
+require 'config.debug'
