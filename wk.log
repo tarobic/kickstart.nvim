@@ -1,0 +1,23 @@
+on_key: k
+on_key: k
+on_key: k
+on_key: k
+on_key: k
+on_key: k
+on_key: <CR>
+on_key: <CR>
+on_key: >
+BufNew(13)
+BufEnter(13)
+  new Mode(n:13)
+Trigger(add) Mode(n:13) ' " ` z= g` g' z <C-W> [ <Space> g ]
+on_key: >
+BufNew(14)
+BufEnter(14)
+  new Mode(n:14)
+Trigger(add) Mode(n:14) ' " ` z= g` g' z <C-W> [ <Space> g ]
+on_key: ?
+BufNew(15)
+BufNew(16)
+on_key: A
+BufEnter(14)

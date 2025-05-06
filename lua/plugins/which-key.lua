@@ -19,6 +19,7 @@ return { -- Useful plugin to show you pending keybinds.
     -- delay between pressing a key and opening which-key (milliseconds)
     -- this setting is independent of vim.opt.timeoutlen
     delay = 0,
+    preset = 'modern',
     icons = {
       -- set icon mappings to true if you have a Nerd Font
       mappings = vim.g.have_nerd_font,
@@ -61,6 +62,8 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>s', group = '[S]earch' },
       { '<leader>t', group = '[T]oggle' },
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { '<leader>w', proxy = '<C-w>', group = 'windows' },
     },
+    debug = true,
   },
 }

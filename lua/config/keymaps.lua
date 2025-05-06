@@ -39,6 +39,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 vim.keymap.set('n', '<leader>c', '<C-w>q', { desc = 'Quit window' })
+vim.keymap.set('n', '<leader>w', '<C-w>', { desc = 'windows' })
 
 vim.keymap.set('n', '-', function()
   local reveal_file = vim.fn.expand '%:p'
