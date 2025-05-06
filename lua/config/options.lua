@@ -1,5 +1,5 @@
 vim.g.have_nerd_font = true
---
+
 vim.opt.number = true
 vim.opt.mouse = 'a'
 vim.opt.breakindent = true
@@ -12,13 +12,14 @@ vim.opt.updatetime = 250
 -- This affects both:
 -- How long to wait between leader-w to show which-key menu.
 -- How quickly to press leader-e to toggle neotree while neotree is focused.
-vim.opt.timeoutlen = 150
+vim.opt.timeoutlen = 200
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.confirm = true
 vim.opt.showmode = false
 vim.opt.winborder = 'rounded'
+vim.opt.mousefocus = true
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
