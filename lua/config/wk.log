@@ -1,2 +1,16 @@
 Trigger(add) Mode(n:12) ' " ` z= g` g' z <C-W> [ <Space> g ]
 on_key: <BS>
+Trigger(add) Mode(n:92) ` ' " z= g` g' ] [ <Space> z g <C-W>
+Trigger(add) Mode(n:1) ` ' " z= g` g' ] [ <Space> z g <C-W>
+Trigger(add) Mode(c:1) <C-R>
+on_key: >
+BufNew(93)
+BufEnter(93)
+  new Mode(n:93)
+Trigger(add) Mode(n:93) ` ' " z= g` g' ] [ <Space> z g <C-W>
+on_key: >
+BufNew(94)
+BufEnter(94)
+  new Mode(n:94)
+Trigger(add) Mode(n:94) ` ' " z= g` g' ] [ <Space> z g <C-W>
+on_key: A

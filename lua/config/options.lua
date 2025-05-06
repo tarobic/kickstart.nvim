@@ -8,7 +8,11 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
-vim.opt.timeoutlen = 50
+
+-- This affects both:
+-- How long to wait between leader-w to show which-key menu.
+-- How quickly to press leader-e to toggle neotree while neotree is focused.
+vim.opt.timeoutlen = 150
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
