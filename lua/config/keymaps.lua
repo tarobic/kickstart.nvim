@@ -38,8 +38,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
-vim.keymap.set('n', '<leader>c', '<C-w>q', { desc = 'Quit window' })
-vim.keymap.set('n', '<leader>w', '<C-w>', { desc = 'windows' })
+-- vim.keymap.set('n', '<leader>q', '<C-w>q', { desc = 'Quit window' })
+vim.keymap.set('n', '<leader>w', '<C-w>', { desc = 'Windows' })
 
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
