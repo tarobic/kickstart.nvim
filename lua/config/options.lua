@@ -1,24 +1,24 @@
 vim.g.have_nerd_font = true
 
 vim.opt.number = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 250
 
 -- This affects both:
 -- How long to wait between leader-w to show which-key menu.
 -- How quickly to press leader-e to toggle neotree while neotree is focused.
 vim.opt.timeoutlen = 200
-vim.opt.inccommand = 'split'
+vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.confirm = true
 vim.opt.showmode = false
-vim.opt.winborder = 'rounded'
+vim.opt.winborder = "rounded"
 vim.opt.mousefocus = true
 
 -- Configure how new splits should be opened
@@ -28,17 +28,17 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
--- vim.opt.list = true
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+   vim.opt.clipboard = "unnamedplus"
 end)
 
-vim.cmd 'set expandtab'
-vim.cmd 'set tabstop=3'
-vim.cmd 'set softtabstop=3'
-vim.cmd 'set shiftwidth=3'
+vim.cmd "set noexpandtab"
+vim.cmd "set tabstop=8"
+vim.cmd "set softtabstop=3"
+vim.cmd "set shiftwidth=3"
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -46,10 +46,10 @@ vim.cmd 'set shiftwidth=3'
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+   desc = "Highlight when yanking (copying) text",
+   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+   callback = function()
+      vim.highlight.on_yank()
+   end,
 })
