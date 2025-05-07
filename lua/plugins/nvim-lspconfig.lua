@@ -156,7 +156,7 @@ return {
                })
             end
 
-            -- The following code creates a keymap to toggle inlay hints in your
+            -- The following code creates a keymap to oggle inlay hints in your
             -- code, if the language server you are using supports them
             --
             -- This may be unwanted, since they displace some of your code
