@@ -61,3 +61,20 @@ vim.keymap.set('n', '-', function()
     reveal_force_cwd = true, -- change cwd without asking if needed
   }
 end, { desc = 'Open Neotree at current file or working directory' })
+
+-- Little terminal
+local job_id = 0
+vim.keymap.set('n', '<leader>lt', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 15)
+
+  job_id = vim.bo.channel
+end, { desc = 'Little Terminal' })
+
+-- Run a custom command in little terminal
+vim.keymap.set('n', '<leader>xc', function()
+  -- Replace 'ls -al' with make, go build, etc.
+  vim.fn.chansend(job_id, { 'ls -al\r\n' })
+end, { desc = 'Terminal command' })
