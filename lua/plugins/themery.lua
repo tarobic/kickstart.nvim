@@ -4,12 +4,12 @@ return {
    config = function()
       require("themery").setup {
          themes = {
-            "catppuccin-mocha",
             "catppuccin-frappe",
             "catppuccin-macchiato",
+            "catppuccin-mocha",
             "tokyonight-storm",
-            "tokyonight-night",
             "tokyonight-moon",
+            "tokyonight-night",
             "blue",
             "darkblue",
             "default",

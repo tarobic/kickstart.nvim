@@ -64,3 +64,18 @@ vim.keymap.set("n", "<leader>xc", function()
    -- Replace 'ls -al' with make, go build, etc.
    vim.fn.chansend(job_id, { "ls -al\r\n" })
 end, { desc = "Terminal command" })
+
+-- vim.keymap.set({ "n", "v" }, "<leader>dh", function()
+--    require("dap.ui.widgets").hover()
+-- end)
+-- vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
+--    require("dap.ui.widgets").preview()
+-- end)
+-- vim.keymap.set("n", "<Leader>df", function()
+--    local widgets = require "dap.ui.widgets"
+--    widgets.centered_float(widgets.frames)
+-- end)
+-- vim.keymap.set("n", "<Leader>ds", function()
+--    local widgets = require "dap.ui.widgets"
+--    widgets.centered_float(widgets.scopes)
+-- end)
