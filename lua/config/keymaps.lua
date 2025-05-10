@@ -1,8 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
@@ -79,3 +77,11 @@ end, { desc = "Terminal command" })
 --    local widgets = require "dap.ui.widgets"
 --    widgets.centered_float(widgets.scopes)
 -- end)
+
+vim.keymap.set("n", "<leader>bd", function()
+   for _, buffer in pairs(vim.fn.getbufinfo()) do
+      if buffer.hidden == 1 then
+         vim.cmd.bd(buffer.bufnr)
+      end
+   end
+end, { desc = "Clear all hidden buffers", silent = false })
