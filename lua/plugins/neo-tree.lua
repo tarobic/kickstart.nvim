@@ -20,4 +20,5 @@ return {
       },
       { "<leader>o", ":Neotree focus<CR>", desc = "Focus Neotree", silent = true },
    },
+   enabled = false,
 }

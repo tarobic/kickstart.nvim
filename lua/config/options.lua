@@ -2,12 +2,16 @@ vim.g.have_nerd_font = true
 
 vim.opt.number = true
 vim.opt.mouse = "a"
-vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 250
+
+-- Wrap options
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = "+++ "
 
 -- This affects both:
 -- How long to wait between leader-w to show which-key menu.
@@ -25,6 +29,10 @@ vim.opt.mousefocus = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Folds
+vim.opt.foldmethod = "indent"
+vim.opt.foldcolumn = "3"
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -36,9 +44,13 @@ vim.schedule(function()
 end)
 
 vim.cmd "set noexpandtab"
-vim.cmd "set tabstop=8"
-vim.cmd "set softtabstop=3"
-vim.cmd "set shiftwidth=3"
+vim.cmd "set tabstop=3"
+vim.cmd "set softtabstop=0"
+vim.cmd "set shiftwidth=0"
+vim.cmd "set smarttab"
+vim.cmd "set autoindent"
+vim.cmd "set smartindent"
+vim.cmd "set nocindent"
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

@@ -85,3 +85,7 @@ vim.keymap.set("n", "<leader>bd", function()
       end
    end
 end, { desc = "Clear all hidden buffers", silent = false })
+
+-- Move by screen lines. Helps with wrapped lines.
+vim.keymap.set("n", "gk", "<Up>")
+vim.keymap.set("n", "gj", "<Down>")
