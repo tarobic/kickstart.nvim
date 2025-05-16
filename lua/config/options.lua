@@ -65,3 +65,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
       vim.highlight.on_yank()
    end,
 })
+
+-- Disable folding in Telescope's result window.
+vim.api.nvim_create_autocmd(
+   "FileType",
+   { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] }
+)
