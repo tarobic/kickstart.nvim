@@ -10,7 +10,6 @@ return {
       "MunifTanjim/nui.nvim",
    },
    lazy = false,
-   cmd = "Neotree",
    keys = {
       {
          "<leader>e",
