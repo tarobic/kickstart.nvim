@@ -21,7 +21,7 @@ return {
       "jay-babu/mason-nvim-dap.nvim",
 
       -- Add your own debuggers here
-      "leoluz/nvim-dap-go",
+      -- "leoluz/nvim-dap-go",
    },
    keys = {
       -- Basic debugging keymaps, feel free to change to your liking!
@@ -105,26 +105,44 @@ return {
          -- online, please don't ask me how to install them :)
          ensure_installed = {
             -- Update this to ensure that you have the debuggers for the langs you want
-            "delve",
+            -- "delve",
          },
       }
 
+      -- lua old
+      -- dap.adapters["local-lua"] = {
+      --    type = "executable",
+      --    command = "node",
+      --    args = {
+      --       "/home/tarobic/software/local-lua-debugger-vscode/extension/debugAdapter.js",
+      --    },
+      --    enrich_config = function(config, on_config)
+      --       if not config["extensionPath"] then
+      --          local c = vim.deepcopy(config)
+      --          c.extensionPath = "/home/tarobic/software/local-lua-debugger-vscode/"
+      --          on_config(c)
+      --       else
+      --          on_config(config)
+      --       end
+      --    end,
+      -- }
+
+      -- aur install
       dap.adapters["local-lua"] = {
          type = "executable",
-         command = "node",
-         args = {
-            "/home/tarobic/software/local-lua-debugger-vscode/extension/debugAdapter.js",
-         },
+         command = "local-lua-dbg",
+         args = { "/usr/lib/node_modules/local-lua-debugger-vscode/extension/debugAdapter.js" },
          enrich_config = function(config, on_config)
             if not config["extensionPath"] then
                local c = vim.deepcopy(config)
-               c.extensionPath = "/home/tarobic/software/local-lua-debugger-vscode/"
+               c.extensionPath = "/usr/lib/node_modules/local-lua-debugger-vscode/"
                on_config(c)
             else
                on_config(config)
             end
          end,
       }
+
       dap.configurations.lua = {
          {
             name = "Current file (local-lua-dbg, lua)",
@@ -139,6 +157,7 @@ return {
          },
       }
 
+      -- godot
       dap.adapters.godot = {
          type = "server",
          host = "127.0.0.1",
@@ -204,12 +223,12 @@ return {
       dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
       -- Install golang specific config
-      require("dap-go").setup {
-         delve = {
-            -- On Windows delve must be run attached or it crashes.
-            -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-            detached = vim.fn.has "win32" == 0,
-         },
-      }
+      -- require("dap-go").setup {
+      --    delve = {
+      --       -- On Windows delve must be run attached or it crashes.
+      --       -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+      --       detached = vim.fn.has "win32" == 0,
+      --    },
+      -- }
    end,
 }
