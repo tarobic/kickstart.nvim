@@ -32,6 +32,7 @@ vim.o.splitbelow = true
 -- Folds
 vim.o.foldmethod = "indent"
 vim.o.foldcolumn = "3"
+vim.o.foldlevelstart = 99
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
