@@ -89,3 +89,10 @@ end, { desc = "Clear all hidden buffers", silent = false })
 -- Move by screen lines. Helps with wrapped lines.
 vim.keymap.set("n", "gk", "<Up>")
 vim.keymap.set("n", "gj", "<Down>")
+
+-- Source current file.
+vim.keymap.set("n", "<space><space>x", "<cmd>source % <CR>")
+-- Execute current line.
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+-- Execute selected lines.
+vim.keymap.set("v", "<space>x", ":lua<CR>")
