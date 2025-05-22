@@ -19,7 +19,8 @@ vim.o.showbreak = "+++ "
 vim.o.timeoutlen = 200
 vim.o.inccommand = "split"
 vim.o.cursorline = true
-vim.o.scrolloff = 10
+vim.o.scrolloff = 5
+vim.o.sidescrolloff = 10
 vim.o.confirm = true
 vim.o.showmode = false
 vim.o.winborder = "rounded"
@@ -72,3 +73,10 @@ vim.api.nvim_create_autocmd(
    "FileType",
    { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] }
 )
+
+-- Show errors and warnings in a floating window
+vim.api.nvim_create_autocmd("CursorHold", {
+   callback = function()
+      vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
+   end,
+})
