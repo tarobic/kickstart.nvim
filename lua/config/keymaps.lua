@@ -58,7 +58,7 @@ vim.keymap.set("n", "<leader>lt", function()
 end, { desc = "Little Terminal" })
 
 -- Run a custom command in little terminal
-vim.keymap.set("n", "<leader>xc", function()
+vim.keymap.set("n", "<leader>lc", function()
    -- Replace 'ls -al' with make, go build, etc.
    vim.fn.chansend(job_id, { "ls -al\r\n" })
 end, { desc = "Terminal command" })
@@ -91,8 +91,8 @@ vim.keymap.set("n", "gk", "<Up>")
 vim.keymap.set("n", "gj", "<Down>")
 
 -- Source current file.
-vim.keymap.set("n", "<space><space>x", "<cmd>source % <CR>")
+vim.keymap.set("n", "<space>x", "<cmd>source % <CR>")
 -- Execute current line.
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("n", "<space>X", ":.lua<CR>")
 -- Execute selected lines.
-vim.keymap.set("v", "<space>x", ":lua<CR>")
+vim.keymap.set("v", "<space>X", ":lua<CR>")

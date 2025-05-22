@@ -221,17 +221,15 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
          -- bashls = {},
-         -- clangd = {},
-         -- cmake = {},
+         clangd = {},
+         cmake = {},
          -- fish_lsp = {},
-         -- gdscript = {},
-         -- gdshader_lsp = {},
-         -- glsl_analyzer = {},
+         glsl_analyzer = {},
          -- gopls = {},
          -- roslyn_ls = {},
          -- omnisharp = {},
          -- pyright = {},
-         -- rust_analyzer = {},
+         rust_analyzer = {},
          -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
          --
          -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -251,7 +249,14 @@ return {
                      callSnippet = "Replace",
                   },
                   -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                  diagnostics = { disable = { "missing-fields" } },
+                  -- diagnostics = { disable = { "missing-fields" } },
+                  --
+                  workspace = {
+                     library = { "${3rd}/love2d/library" },
+                     checkThirdParty = "Apply",
+                  },
+                  -- workspace = nil,
+                  -- workspace = {},
                },
             },
          },

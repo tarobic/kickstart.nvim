@@ -54,6 +54,13 @@ return {
          desc = "Debug: Step Out",
       },
       {
+         "<F4>",
+         function()
+            require("dap").step_back()
+         end,
+         desc = "Debug: Step Back",
+      },
+      {
          "<F9>",
          function()
             require("dap").toggle_breakpoint()
