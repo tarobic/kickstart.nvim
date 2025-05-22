@@ -1,6 +1,7 @@
 return {
    -- Main LSP Configuration
    "neovim/nvim-lspconfig",
+   enabled = false,
    dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
@@ -16,31 +17,6 @@ return {
       "saghen/blink.cmp",
    },
    config = function()
-      -- Brief aside: **What is LSP?**
-      --
-      -- LSP is an initialism you've probably heard, but might not understand what it is.
-      --
-      -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-      -- and language tooling communicate in a standardized fashion.
-      --
-      -- In general, you have a "server" which is some tool built to understand a particular
-      -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-      -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-      -- processes that communicate with some "client" - in this case, Neovim!
-      --
-      -- LSP provides Neovim with features like:
-      --  - Go to definition
-      --  - Find references
-      --  - Autocompletion
-      --  - Symbol Search
-      --  - and more!
-      --
-      -- Thus, Language Servers are external tools that must be installed separately from
-      -- Neovim. This is where `mason` and related plugins come into play.
-      --
-      -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-      -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -60,18 +36,18 @@ return {
 
             -- Rename the variable under your cursor.
             --  Most Language Servers support renaming across files, etc.
-            map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+            -- map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
 
             -- Execute a code action, usually your cursor needs to be on top of an error
             -- or a suggestion from your LSP for this to activate.
-            map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
+            -- map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
 
             -- Find references for the word under your cursor.
-            map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+            -- map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
             -- Jump to the implementation of the word under your cursor.
             --  Useful when your language has ways of declaring types without an actual implementation.
-            map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+            -- map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
             -- Jump to the definition of the word under your cursor.
             --  This is where a variable was first declared, or where a function is defined, etc.
@@ -84,7 +60,7 @@ return {
 
             -- Fuzzy find all the symbols in your current document.
             --  Symbols are things like variables, functions, types, etc.
-            map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
+            -- map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
 
             -- Fuzzy find all the symbols in your current workspace.
             --  Similar to document symbols, except searches over your entire project.
@@ -102,19 +78,6 @@ return {
                require("telescope.builtin").lsp_type_definitions,
                "[G]oto [T]ype Definition"
             )
-
-            -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-            ---@param client vim.lsp.Client
-            ---@param method vim.lsp.protocol.Method
-            ---@param bufnr? integer some lsp support methods only in specific files
-            ---@return boolean
-            local function client_supports_method(client, method, bufnr)
-               if vim.fn.has "nvim-0.11" == 1 then
-                  return client:supports_method(method, bufnr)
-               else
-                  return client.supports_method(method, { bufnr = bufnr })
-               end
-            end
 
             -- The following two autocommands are used to highlight references of the
             -- word under your cursor when your cursor rests there for a little while.
@@ -221,15 +184,15 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
          -- bashls = {},
-         clangd = {},
-         cmake = {},
+         -- clangd = {},
+         -- cmake = {},
          -- fish_lsp = {},
-         glsl_analyzer = {},
+         -- glsl_analyzer = {},
          -- gopls = {},
          -- roslyn_ls = {},
          -- omnisharp = {},
          -- pyright = {},
-         rust_analyzer = {},
+         -- rust_analyzer = {},
          -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
          --
          -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -249,12 +212,12 @@ return {
                      callSnippet = "Replace",
                   },
                   -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                  -- diagnostics = { disable = { "missing-fields" } },
+                  diagnostics = { disable = { "missing-fields" } },
                   --
-                  workspace = {
-                     library = { "${3rd}/love2d/library" },
-                     checkThirdParty = "Apply",
-                  },
+                  -- workspace = {
+                  --    library = { "${3rd}/love2d/library" },
+                  --    checkThirdParty = "Apply",
+                  -- },
                   -- workspace = nil,
                   -- workspace = {},
                },
