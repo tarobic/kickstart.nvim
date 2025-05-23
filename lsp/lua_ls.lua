@@ -20,21 +20,26 @@ return {
    settings = {
       Lua = {
          completion = {
-            callSnippet = "Both",
-            keywordSnippet = "Both",
+            callSnippet = "Replace",
+            -- keywordSnippet = "Both",
          },
          diagnostics = {
-            disable = { "missing-parameters", "missing-fields", "lowercase-global" },
+            disable = {
+               "missing-parameters",
+               "missing-fields",
+               "unused-function",
+               "unused-local",
+            },
          },
          format = {
-            enable = false
+            enable = false,
          },
          hint = {
             enable = true,
          },
          runtime = {
-            -- version = "5.4",
-            version = "LuaJIT"
+            version = "Lua 5.4",
+            -- version = "LuaJIT",
          },
          workspace = {
             library = {
@@ -44,7 +49,4 @@ return {
          },
       },
    },
-
-   single_file_support = true,
-   log_level = vim.lsp.protocol.MessageType.Warning,
 }

@@ -28,7 +28,7 @@ return { -- Autoformat
       --     }
       --   end
       -- end,
-      -- format_on_save = { timeout_ms = 500 },
+      format_on_save = { timeout_ms = 500 },
       formatters_by_ft = {
          lua = { "stylua" },
          -- Conform can also run multiple formatters sequentially

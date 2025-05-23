@@ -202,27 +202,27 @@ return {
          -- ts_ls = {},
          --
 
-         lua_ls = {
-            -- cmd = { ... },
-            -- filetypes = { ... },
-            -- capabilities = {},
-            settings = {
-               Lua = {
-                  completion = {
-                     callSnippet = "Replace",
-                  },
-                  -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                  diagnostics = { disable = { "missing-fields" } },
-                  --
-                  -- workspace = {
-                  --    library = { "${3rd}/love2d/library" },
-                  --    checkThirdParty = "Apply",
-                  -- },
-                  -- workspace = nil,
-                  -- workspace = {},
-               },
-            },
-         },
+         -- lua_ls = {
+         --    cmd = { ... },
+         --    filetypes = { ... },
+         --    capabilities = {},
+         --    settings = {
+         --       Lua = {
+         --          completion = {
+         --             callSnippet = "Replace",
+         --          },
+         --          You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+         --          diagnostics = { disable = { "missing-fields" } },
+         --
+         --          workspace = {
+         --             library = { "${3rd}/love2d/library" },
+         --             checkThirdParty = "Apply",
+         --          },
+         --          workspace = nil,
+         --          workspace = {},
+         --       },
+         --    },
+         -- },
       }
 
       -- Ensure the servers and tools above are installed
