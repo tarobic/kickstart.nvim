@@ -24,6 +24,7 @@ vim.o.sidescrolloff = 10
 vim.o.confirm = true
 vim.o.showmode = false
 vim.o.winborder = "rounded"
+vim.o.winblend = 30
 vim.o.mousefocus = true
 
 -- Configure how new splits should be opened
