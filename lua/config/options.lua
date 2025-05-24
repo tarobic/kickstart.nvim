@@ -94,12 +94,23 @@ vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" },
    { pattern = "term://*", command = "startinsert" }
 )
 
--- Enable treesitter highlighting and folding.
+-- Enable treesitter highlighting, indenting, and folding.
 vim.api.nvim_create_autocmd('FileType', {
    pattern = { '<filetype>' },
    callback = function()
       vim.treesitter.start()
       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
    end,
 })
+require "nvim-treesitter".install {
+   "c_sharp",
+   "cpp",
+   "gdscript",
+   "gdshader",
+   "gitignore",
+   "glsl",
+   "python",
+   "rust",
+   "toml",
+}
