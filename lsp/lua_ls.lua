@@ -32,15 +32,15 @@ return {
             },
          },
          format = {
-            enable = false,
+            enable = true,
          },
          hint = {
             enable = true,
          },
-         runtime = {
-            version = "Lua 5.4",
-            -- version = "LuaJIT",
-         },
+         -- runtime = {
+         -- version = "Lua 5.4",
+         -- version = "LuaJIT",
+         -- },
          workspace = {
             library = {
                -- "${3rd}/love2d/library",

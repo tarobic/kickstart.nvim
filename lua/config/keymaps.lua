@@ -5,10 +5,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
 vim.keymap.set(
-   "n",
-   "<leader>q",
-   vim.diagnostic.setloclist,
-   { desc = "Open diagnostic [Q]uickfix list" }
+	"n",
+	"<leader>q",
+	vim.diagnostic.setloclist,
+	{ desc = "Open diagnostic [Q]uickfix list" }
 )
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -49,18 +49,18 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Little terminal
 local job_id = 0
 vim.keymap.set("n", "<leader>lt", function()
-   vim.cmd.vnew()
-   vim.cmd.term()
-   vim.cmd.wincmd "J"
-   vim.api.nvim_win_set_height(0, 15)
+	vim.cmd.vnew()
+	vim.cmd.term()
+	vim.cmd.wincmd "J"
+	vim.api.nvim_win_set_height(0, 15)
 
-   job_id = vim.bo.channel
+	job_id = vim.bo.channel
 end, { desc = "Little Terminal" })
 
 -- Run a custom command in little terminal
 vim.keymap.set("n", "<leader>lc", function()
-   -- Replace 'ls -al' with make, go build, etc.
-   vim.fn.chansend(job_id, { "ls -al\r\n" })
+	-- Replace 'ls -al' with make, go build, etc.
+	vim.fn.chansend(job_id, { "ls -al\r\n" })
 end, { desc = "Terminal command" })
 
 -- vim.keymap.set({ "n", "v" }, "<leader>dh", function()
@@ -79,11 +79,11 @@ end, { desc = "Terminal command" })
 -- end)
 
 vim.keymap.set("n", "<leader>bd", function()
-   for _, buffer in pairs(vim.fn.getbufinfo()) do
-      if buffer.hidden == 1 then
-         vim.cmd.bd(buffer.bufnr)
-      end
-   end
+	for _, buffer in pairs(vim.fn.getbufinfo()) do
+		if buffer.hidden == 1 then
+			vim.cmd.bd(buffer.bufnr)
+		end
+	end
 end, { desc = "Clear all hidden buffers", silent = false })
 
 -- Move by screen lines. Helps with wrapped lines.

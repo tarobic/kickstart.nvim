@@ -1,7 +1,7 @@
 return {
    -- Main LSP Configuration
    "neovim/nvim-lspconfig",
-   -- enabled = false,
+   enabled = false,
    dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
@@ -87,7 +87,7 @@ return {
             local client = vim.lsp.get_client_by_id(event.data.client_id)
             if
                client
-               and client_supports_method(
+               and client:supports_method(
                   client,
                   vim.lsp.protocol.Methods.textDocument_documentHighlight,
                   event.buf
@@ -125,7 +125,7 @@ return {
             -- This may be unwanted, since they displace some of your code
             if
                client
-               and client_supports_method(
+               and client:supports_method(
                   client,
                   vim.lsp.protocol.Methods.textDocument_inlayHint,
                   event.buf
