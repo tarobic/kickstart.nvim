@@ -33,7 +33,7 @@ vim.o.autochdir = false
 
 -- Window
 vim.o.winborder = "rounded"
-vim.o.winblend = 30
+vim.o.winblend = 15
 
 -- Mouse
 vim.o.mouse = "a"
@@ -76,18 +76,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
    end,
 })
 
--- Disable folding in Telescope's result window.
-vim.api.nvim_create_autocmd(
-   "FileType",
-   { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] }
-)
-
 -- Show errors and warnings in a floating window
-vim.api.nvim_create_autocmd("CursorHold", {
-   callback = function()
-      vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
-   end,
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--    callback = function()
+--       vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
+--    end,
+-- })
 
 -- Start in insert mode when entering terminal buffer.
 vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" },
@@ -111,6 +105,7 @@ require "nvim-treesitter".install {
    "gitignore",
    "glsl",
    "python",
+   "regex",
    "rust",
    "toml",
 }

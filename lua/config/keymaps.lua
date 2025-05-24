@@ -44,7 +44,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- vim.keymap.set('n', '<leader>q', '<C-w>q', { desc = 'Quit window' })
 vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
 
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+-- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Little terminal
 local job_id = 0

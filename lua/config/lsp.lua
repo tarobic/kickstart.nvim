@@ -15,18 +15,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
       -- To jump back press <C-t>.
-      map("grd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-      map("grD", require("telescope.builtin").lsp_definitions, "Goto Declaration")
+      -- map("grd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+      -- map("grD", require("telescope.builtin").lsp_definitions, "Goto Declaration")
 
       -- Fuzzy find all the symbols in your current workspace.
       --  Similar to document symbols, except searches over your entire project.
-      map(
-         "gW",
-         require("telescope.builtin").lsp_dynamic_workspace_symbols,
-         "Open Workspace Symbols"
-      )
-
-      map("grt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+      -- map(
+      --    "gW",
+      --    require("telescope.builtin").lsp_dynamic_workspace_symbols,
+      --    "Open Workspace Symbols"
+      -- )
+      --
+      -- map("grt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
 
       -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
       if client:supports_method "textDocument/completion" then

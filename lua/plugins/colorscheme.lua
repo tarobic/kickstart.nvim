@@ -11,7 +11,8 @@ return {
    -- Treesitter combatible:
    {
       "folke/tokyonight.nvim",
-      lazy = true,
+      lazy = false,
+      priority = 1000,
       -- config = function()
       --   ---@diagnostic disable-next-line: missing-fields
       --   require('tokyonight').setup {
@@ -23,7 +24,6 @@ return {
    },
    {
       "Mofiqul/dracula.nvim",
-      lazy = false,
-      priority = 1000,
+      lazy = true,
    },
 }

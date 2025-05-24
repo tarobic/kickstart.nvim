@@ -3,4 +3,4 @@ require "config.lazy"
 require "config.options"
 require "config.lsp"
 
-vim.cmd.colorscheme("dracula")
+vim.cmd.colorscheme("tokyonight")
