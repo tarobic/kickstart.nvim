@@ -2,10 +2,13 @@ return {
    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
    {
       "catppuccin/nvim",
-      lazy = false,
-      name = "catppuccin",
-      priority = 1000,
+      lazy = true,
    },
+   {
+      "rebelot/kanagawa.nvim",
+      lazy = true,
+   },
+   -- Treesitter combatible:
    {
       "folke/tokyonight.nvim",
       lazy = true,
@@ -19,8 +22,8 @@ return {
       -- end,
    },
    {
-      "rebelot/kanagawa.nvim",
-      lazy = true,
-      name = "kanagawa"
-   }
+      "Mofiqul/dracula.nvim",
+      lazy = false,
+      priority = 1000,
+   },
 }
