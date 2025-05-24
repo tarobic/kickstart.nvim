@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
          vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
          vim.cmd "set completeopt+=menu,menuone,noinsert,popup,preinsert"
 
-         map("<C-space>", vim.lsp.completion.get, "Show Autocomplete Menu")
+         map("<C-space>", vim.lsp.completion.get, "Show Autocomplete Menu", "i")
       end
 
       -- Auto-format ("lint") on save.
@@ -137,10 +137,11 @@ for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
    table.insert(lsp_configs, server_name)
 end
 
-vim.lsp.config("lua_ls", {
-   on_init = function()
-      print "lua_ls now runs in the background"
-   end,
-})
+-- Run a function when starting new lsp
+-- vim.lsp.config("lua_ls", {
+--    on_init = function()
+--       print "lua_ls now runs in the background"
+--    end,
+-- })
 
 vim.lsp.enable(lsp_configs)
