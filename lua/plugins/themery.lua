@@ -1,5 +1,6 @@
 return {
    "zaldih/themery.nvim",
+   enabled = false,
    lazy = false,
    config = function()
       require("themery").setup {

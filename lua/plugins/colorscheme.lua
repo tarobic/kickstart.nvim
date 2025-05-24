@@ -1,11 +1,13 @@
-return { -- You can easily change to a different colorscheme.
-   -- Change the name of the colorscheme plugin below, and then
-   -- change the command in the config to whatever the name of that colorscheme is.
-   --
+return {
    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
    {
+      "catppuccin/nvim",
+      lazy = false,
+      name = "catppuccin",
+      priority = 1000,
+   },
+   {
       "folke/tokyonight.nvim",
-      priority = 1000, -- Make sure to load this before all the other start plugins.
       lazy = true,
       -- config = function()
       --   ---@diagnostic disable-next-line: missing-fields
@@ -17,9 +19,8 @@ return { -- You can easily change to a different colorscheme.
       -- end,
    },
    {
-      "catppuccin/nvim",
+      "rebelot/kanagawa.nvim",
       lazy = true,
-      name = "catppuccin",
-      priority = 1000,
-   },
+      name = "kanagawa"
+   }
 }
