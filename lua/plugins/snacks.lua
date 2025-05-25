@@ -1,27 +1,30 @@
+---@diagnostic disable: undefined-global
+---@global undefined = "Snacks"
 return {
    "folke/snacks.nvim",
    priority = 1000,
    lazy = false,
+   ---@diagnostic disable-next-line: undefined-doc-name
    ---@type snacks.Config
    opts = {
-      bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      explorer = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
+      bigfile = { enabled = false },
+      dashboard = { enabled = false },
+      explorer = { enabled = false },
+      indent = { enabled = false },
+      input = { enabled = false },
       notifier = {
-         enabled = true,
+         enabled = false,
          timeout = 3000,
       },
       picker = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
+      quickfile = { enabled = false },
+      scope = { enabled = false },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = false },
+      words = { enabled = false },
       styles = {
          notification = {
-            -- wo = { wrap = true } -- Wrap notifications
+            wo = { wrap = true } -- Wrap notifications
          }
       }
    },

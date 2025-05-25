@@ -1,6 +1,6 @@
 require "config.keymaps"
+require "config.lsp"
 require "config.lazy"
 require "config.options"
-require "config.lsp"
 
 vim.cmd.colorscheme("tokyonight")

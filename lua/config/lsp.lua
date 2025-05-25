@@ -3,6 +3,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
    callback = function(args)
       local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
+      -- require("lazydev").find_workspace(args.buf)
+
       -- lsp keymaps
       local map = function(keys, func, desc, mode)
          mode = mode or "n"
@@ -12,7 +14,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       if client:supports_method "textDocument/implementation" then
          map("grb", vim.lsp.buf.implementation, "List implementations")
       end
-
 
       -- To jump back press <C-t>.
       -- map("grd", require("telescope.builtin").lsp_definitions, "Goto Definition")

@@ -30,6 +30,7 @@ return {
                "unused-function",
                "unused-local",
             },
+            -- globals = { "Snacks" },
          },
          format = {
             enable = true,
@@ -43,8 +44,8 @@ return {
          -- },
          workspace = {
             library = {
-               -- "${3rd}/love2d/library",
-               vim.fn.globpath(vim.o.runtimepath, "love2d/library"),
+               "${3rd}/love2d/library",
+               -- vim.fn.globpath(vim.o.runtimepath, "love2d/library"),
             },
          },
       },
