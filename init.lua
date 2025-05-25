@@ -1,6 +1,8 @@
+DefaultColorscheme = "tokyonight"
+
 require "config.keymaps"
 require "config.lsp"
 require "config.lazy"
 require "config.options"
 
-vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme(DefaultColorscheme)

@@ -1,18 +1,27 @@
+local function checkIfDefault(name)
+   -- if DefaultColorscheme == name then
+   --    return true, 1000
+   -- end
+   -- return false, 0
+   return DefaultColorscheme == name
+end
+
 return {
-   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
    {
       "catppuccin/nvim",
-      lazy = true,
+      -- lazy, priority = checkIfDefault("catppuccin"),
+      lazy = not checkIfDefault("catppuccin"),
    },
    {
       "rebelot/kanagawa.nvim",
-      lazy = true,
+      -- lazy, priority = checkIfDefault("kanagawa"),
+      lazy = not checkIfDefault("kanagawa")
    },
    -- Treesitter combatible:
    {
       "folke/tokyonight.nvim",
-      lazy = false,
-      priority = 1000,
+      -- lazy, priority = checkIfDefault("tokyonight"),
+      lazy = not checkIfDefault("tokyonight")
       -- config = function()
       --   ---@diagnostic disable-next-line: missing-fields
       --   require('tokyonight').setup {
@@ -24,6 +33,7 @@ return {
    },
    {
       "Mofiqul/dracula.nvim",
-      lazy = true,
+      -- lazy, priority = checkIfDefault("dracula"),
+      lazy = not checkIfDefault("dracula")
    },
 }

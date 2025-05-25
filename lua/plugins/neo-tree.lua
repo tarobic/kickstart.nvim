@@ -4,6 +4,7 @@
 return {
    "nvim-neo-tree/neo-tree.nvim",
    version = "*",
+   enabled = false,
    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -19,5 +20,4 @@ return {
       },
       { "<leader>o", ":Neotree focus<CR>", desc = "Focus Neotree", silent = true },
    },
-   enabled = false,
 }

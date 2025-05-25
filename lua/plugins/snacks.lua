@@ -7,21 +7,26 @@ return {
    ---@diagnostic disable-next-line: undefined-doc-name
    ---@type snacks.Config
    opts = {
-      bigfile = { enabled = false },
-      dashboard = { enabled = false },
-      explorer = { enabled = false },
-      indent = { enabled = false },
-      input = { enabled = false },
+      bigfile = { enabled = true },
+      bufdelete = { enabled = true },
+      dashboard = { enabled = true },
+      debug = { enabled = true },
+      explorer = { enabled = true },
+      git = { enabled = true },
+      gitbrowse = { enabled = true },
+      image = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
       notifier = {
-         enabled = false,
+         enabled = true,
          timeout = 3000,
       },
       picker = { enabled = true },
-      quickfile = { enabled = false },
-      scope = { enabled = false },
-      scroll = { enabled = false },
-      statuscolumn = { enabled = false },
-      words = { enabled = false },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true, animate = { easing = "inOutSine" } },
+      statuscolumn = { enabled = true, folds = { open = true } },
+      words = { enabled = true },
       styles = {
          notification = {
             wo = { wrap = true } -- Wrap notifications
@@ -139,10 +144,12 @@ return {
             Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
             Snacks.toggle.diagnostics():map("<leader>ud")
             Snacks.toggle.line_number():map("<leader>ul")
-            Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+            Snacks.toggle.option("conceallevel",
+               { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
                 :map("<leader>uc")
             Snacks.toggle.treesitter():map("<leader>uT")
-            Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map(
+            Snacks.toggle.option("background",
+               { off = "light", on = "dark", name = "Dark Background" }):map(
                "<leader>ub")
             Snacks.toggle.inlay_hints():map("<leader>uh")
             Snacks.toggle.indent():map("<leader>ug")

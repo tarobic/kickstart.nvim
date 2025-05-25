@@ -21,7 +21,7 @@ require("lazy").setup {
    spec = {
       { import = "plugins" },
    },
-   install = { colorscheme = { "tokyonight" } },
+   install = { colorscheme = { DefaultColorscheme } },
    checker = { enabled = true },
    ui = {
       -- If you are using a Nerd Font: set icons to an empty table which will use the
