@@ -30,6 +30,7 @@ vim.o.virtualedit = "block"
 vim.o.termguicolors = true
 -- Auto cd to directory for file in current buffer.
 vim.o.autochdir = false
+vim.o.smoothscroll = true
 
 -- Window
 vim.o.winborder = "rounded"

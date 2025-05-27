@@ -20,11 +20,19 @@ return {
       notifier = {
          enabled = true,
          timeout = 3000,
+         margin = { top = 2, right = 10, bottom = 1 }
       },
       picker = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true, animate = { easing = "inOutSine" } },
+      scroll = {
+         enabled = true,
+         animate = {
+            easing = "inOutQuart",
+            -- duration = 20,
+            fps = 144,
+         }
+      },
       statuscolumn = { enabled = true, folds = { open = true } },
       words = { enabled = true },
       styles = {

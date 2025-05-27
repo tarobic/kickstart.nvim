@@ -11,23 +11,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
          vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
       end
 
+      map("<leader>fo", vim.lsp.buf.format({ async = true }), "Format buffer")
+
       if client:supports_method "textDocument/implementation" then
          map("grb", vim.lsp.buf.implementation, "List implementations")
       end
-
-      -- To jump back press <C-t>.
-      -- map("grd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-      -- map("grD", require("telescope.builtin").lsp_definitions, "Goto Declaration")
-
-      -- Fuzzy find all the symbols in your current workspace.
-      --  Similar to document symbols, except searches over your entire project.
-      -- map(
-      --    "gW",
-      --    require("telescope.builtin").lsp_dynamic_workspace_symbols,
-      --    "Open Workspace Symbols"
-      -- )
-      --
-      -- map("grt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
 
       -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
       if client:supports_method "textDocument/completion" then
@@ -50,7 +38,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
           not client:supports_method "textDocument/willSaveWaitUntil"
           and client:supports_method "textDocument/formatting"
       then
-         -- map("<leader>f", vim.lsp.buf.format { bufnr = args.buf, id = client.id, timeout_ms = 1000 }, "Format Current Buffer")
          vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
             buffer = args.buf,
@@ -63,7 +50,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       -- inlay hints
       if client:supports_method("textDocument/inlayHint") then
          vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-         -- map("<leader>th", vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled), "Toggle Inlay Hints")
       end
 
       -- Highlight word under cursor.
