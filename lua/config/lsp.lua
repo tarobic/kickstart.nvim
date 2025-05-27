@@ -11,8 +11,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
          vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
       end
 
-      map("<leader>fo", vim.lsp.buf.format({ async = true }), "Format buffer")
-
       if client:supports_method "textDocument/implementation" then
          map("grb", vim.lsp.buf.implementation, "List implementations")
       end
@@ -46,6 +44,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end,
          })
       end
+
+      -- Auto-format keymap
+      vim.keymap.set("n", "<leader>fo",
+         function() vim.lsp.buf.format({ async = true, bufnr = args.buf, id = client.id }) end,
+         { buffer = args.buf, desc = "LSP: Format buffer" })
 
       -- inlay hints
       if client:supports_method("textDocument/inlayHint") then
