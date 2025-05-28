@@ -11,7 +11,10 @@ vim.o.cursorline = true
 -- Wrap
 vim.o.linebreak = true
 vim.o.breakindent = true
-vim.o.showbreak = "+++ "
+vim.o.showbreak = ">>>"
+-- vim.o.wrap = false
+-- vim.o.sidescroll = 1
+-- vim.o.sidescrolloff = 1
 
 -- Misc
 vim.o.ignorecase = true
@@ -84,6 +87,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --       vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
 --    end,
 -- })
+
+vim.diagnostic.config({ virtual_lines = true })
 
 -- Start in insert mode when entering terminal buffer.
 vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" },
