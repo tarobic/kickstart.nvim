@@ -11,7 +11,7 @@ return {
       bufdelete = { enabled = true },
       dashboard = { enabled = true },
       debug = { enabled = true },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       git = { enabled = true },
       gitbrowse = { enabled = true },
       image = { enabled = true },
@@ -51,7 +51,8 @@ return {
       { "<leader>e",       function() Snacks.explorer() end,                                       desc = "File Explorer" },
       -- find
       { "<leader>fb",      function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
-      { "<leader>fc",      function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+      { "<leader>fc",      function() Snacks.picker.files({ cwd = vim.fn.stdpath(
+         "config") }) end,                                                                         desc = "Find Config File" },
       { "<leader>ff",      function() Snacks.picker.files() end,                                   desc = "Find Files" },
       { "<leader>fg",      function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
       { "<leader>fp",      function() Snacks.picker.projects() end,                                desc = "Projects" },
@@ -71,7 +72,7 @@ return {
       { "<leader>sw",      function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word", mode = { "n", "x" } },
       -- search
       { '<leader>s"',      function() Snacks.picker.registers() end,                               desc = "Registers" },
-      { '<leader>s/',      function() Snacks.picker.search_history() end,                          desc = "Search History" },
+      { "<leader>s/",      function() Snacks.picker.search_history() end,                          desc = "Search History" },
       { "<leader>sa",      function() Snacks.picker.autocmds() end,                                desc = "Autocmds" },
       { "<leader>sb",      function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
       { "<leader>sc",      function() Snacks.picker.command_history() end,                         desc = "Command History" },
@@ -147,9 +148,11 @@ return {
             vim.print = _G.dd -- Override print to use snacks for `:=` command
 
             -- Create some toggle mappings
-            Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+            Snacks.toggle.option("spell", { name = "Spelling" }):map(
+            "<leader>us")
             Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-            Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+            Snacks.toggle.option("relativenumber", { name = "Relative Number" })
+                :map("<leader>uL")
             Snacks.toggle.diagnostics():map("<leader>ud")
             Snacks.toggle.line_number():map("<leader>ul")
             Snacks.toggle.option("conceallevel",
