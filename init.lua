@@ -1,4 +1,4 @@
-DefaultColorscheme = "tokyonight"
+DefaultColorscheme = "vague"
 
 require "config.keymaps"
 require "config.lsp"
