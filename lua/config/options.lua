@@ -71,10 +71,11 @@ vim.o.cindent = false
 --  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.hl.on_yank()
-	end,
+	group = vim.api.nvim_create_augroup(
+		"kickstart-highlight-yank",
+		{ clear = true }
+	),
+	callback = function() vim.hl.on_yank() end,
 })
 
 -- Show errors and warnings in a floating window
@@ -84,10 +85,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --    end,
 -- })
 
-vim.diagnostic.config({ virtual_lines = true })
+vim.diagnostic.config { virtual_lines = true }
 
 -- Start in insert mode when entering terminal buffer.
-vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" }, { pattern = "term://*", command = "startinsert" })
+vim.api.nvim_create_autocmd(
+	{ "TermOpen", "WinEnter" },
+	{ pattern = "term://*", command = "startinsert" }
+)
 
 -- Enable treesitter highlighting, indenting, and folding.
 vim.api.nvim_create_autocmd("FileType", {
@@ -117,9 +121,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-		if not client or type(value) ~= "table" then
-			return
-		end
+		if not client or type(value) ~= "table" then return end
 		local p = progress[client.id]
 
 		for i = 1, #p + 1 do
@@ -138,11 +140,23 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		end
 
 		local msg = {} ---@type string[]
-		progress[client.id] = vim.tbl_filter(function(v)
-			return table.insert(msg, v.msg) or not v.done
-		end, p)
+		progress[client.id] = vim.tbl_filter(
+			function(v) return table.insert(msg, v.msg) or not v.done end,
+			p
+		)
 
-		local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+		local spinner = {
+			"⠋",
+			"⠙",
+			"⠹",
+			"⠸",
+			"⠼",
+			"⠴",
+			"⠦",
+			"⠧",
+			"⠇",
+			"⠏",
+		}
 		vim.notify(table.concat(msg, "\n"), "info", {
 			id = "lsp_progress",
 			title = client.name,

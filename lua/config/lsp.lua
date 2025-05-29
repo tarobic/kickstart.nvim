@@ -8,10 +8,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- lsp keymaps
 		local map = function(keys, func, desc, mode)
 			mode = mode or "n"
-			vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
+			vim.keymap.set(
+				mode,
+				keys,
+				func,
+				{ buffer = args.buf, desc = "LSP: " .. desc }
+			)
 		end
 
-		if client:supports_method("textDocument/implementation") then
+		if client:supports_method "textDocument/implementation" then
 			map("grb", vim.lsp.buf.implementation, "List implementations")
 		end
 
@@ -52,13 +57,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		--     { buffer = args.buf, desc = "LSP: Format buffer" })
 
 		-- inlay hints
-		if client:supports_method("textDocument/inlayHint") then
+		if client:supports_method "textDocument/inlayHint" then
 			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 		end
 
 		-- Highlight word under cursor.
-		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, args.buf) then
-			local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+		if
+			client
+			and client:supports_method(
+				vim.lsp.protocol.Methods.textDocument_documentHighlight,
+				args.buf
+			)
+		then
+			local highlight_augroup =
+				vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = args.buf,
 				group = highlight_augroup,
@@ -75,17 +87,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
 				callback = function(event)
 					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({
+					vim.api.nvim_clear_autocmds {
 						group = "lsp-highlight",
 						buffer = event.buf,
-					})
+					}
 				end,
 			})
 		end
 
 		-- Diagnostic Config
 		-- See :help vim.diagnostic.Opts
-		vim.diagnostic.config({
+		vim.diagnostic.config {
 			severity_sort = true,
 			float = { border = "rounded", source = "if_many" },
 			underline = { severity = vim.diagnostic.severity.ERROR },
@@ -110,7 +122,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			--       return diagnostic_message[diagnostic.severity]
 			--    end,
 			-- },
-		})
+		}
 	end,
 })
 
