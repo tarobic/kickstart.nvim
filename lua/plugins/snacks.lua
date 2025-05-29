@@ -9,7 +9,28 @@ return {
 	opts = {
 		bigfile = { enabled = true },
 		bufdelete = { enabled = true },
-		dashboard = { enabled = true },
+		dashboard = {
+			enabled = true,
+			sections = {
+				{ section = "header" },
+				{ section = "keys", gap = 1, padding = 2 },
+				{
+					icon = " ",
+					title = "Recent Files",
+					section = "recent_files",
+					indent = 2,
+					padding = 2,
+				},
+				{
+					icon = " ",
+					title = "Projects",
+					section = "projects",
+					indent = 2,
+					padding = 2,
+				},
+				{ section = "startup" },
+			},
+		},
 		debug = { enabled = true },
 		explorer = { enabled = true },
 		git = { enabled = false },
@@ -422,13 +443,10 @@ return {
 				Snacks.toggle.diagnostics():map "<leader>ud"
 				Snacks.toggle.line_number():map "<leader>ul"
 				Snacks.toggle
-					.option(
-						"conceallevel",
-						{
-							off = 0,
-							on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
-						}
-					)
+					.option("conceallevel", {
+						off = 0,
+						on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
+					})
 					:map "<leader>uc"
 				Snacks.toggle.treesitter():map "<leader>uT"
 				Snacks.toggle
