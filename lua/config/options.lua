@@ -54,7 +54,7 @@ vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Indentation
-vim.o.expandtab = true
+vim.o.expandtab = false
 vim.o.tabstop = 3
 vim.o.softtabstop = 3
 vim.o.shiftwidth = 3
@@ -180,17 +180,19 @@ vim.diagnostic.config {
 			[vim.diagnostic.severity.HINT] = "󰌶 ",
 		},
 	} or {},
-	-- virtual_text = {
-	--    source = "if_many",
-	--    spacing = 2,
-	--    format = function(diagnostic)
-	--       local diagnostic_message = {
-	--          [vim.diagnostic.severity.ERROR] = diagnostic.message,
-	--          [vim.diagnostic.severity.WARN] = diagnostic.message,
-	--          [vim.diagnostic.severity.INFO] = diagnostic.message,
-	--          [vim.diagnostic.severity.HINT] = diagnostic.message,
-	--       }
-	--       return diagnostic_message[diagnostic.severity]
-	--    end,
-	-- },
+	virtual_text = {
+		-- source = "if_many",
+		source = true,
+		spacing = 2,
+		format = function(diagnostic)
+			local diagnostic_message = {
+				[vim.diagnostic.severity.ERROR] = diagnostic.message,
+				[vim.diagnostic.severity.WARN] = diagnostic.message,
+				[vim.diagnostic.severity.INFO] = diagnostic.message,
+				[vim.diagnostic.severity.HINT] = diagnostic.message,
+			}
+			return diagnostic_message[diagnostic.severity]
+		end,
+		current_line = true,
+	},
 }
