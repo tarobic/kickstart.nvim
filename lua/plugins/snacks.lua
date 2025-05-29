@@ -32,7 +32,7 @@ return {
 			},
 		},
 		debug = { enabled = true },
-		explorer = { enabled = true },
+		explorer = { enabled = false, replace_netrw = true },
 		git = { enabled = false },
 		gitbrowse = { enabled = false },
 		image = { enabled = true },

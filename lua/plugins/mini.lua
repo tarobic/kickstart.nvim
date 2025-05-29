@@ -63,7 +63,6 @@ return { -- Collection of various small independent plugins/modules
 			},
 		}
 
-		-- require("mini.completion").setup()
 		require("mini.sessions").setup()
 	end,
 }
