@@ -15,18 +15,16 @@ return {
 	},
 	settings = {
 		Lua = {
-			completion = {
-				callSnippet = "Replace",
-				-- keywordSnippet = "Both",
+			completion = { callSnippet = "Replace", },
+			diagnostics = {
+				globals = { "vim", "love" },
+				disable = {
+					"missing-parameters",
+					"missing-fields",
+					"unused-function",
+					"unused-local",
+				},
 			},
-			-- diagnostics = {
-			-- 	disable = {
-			-- 		"missing-parameters",
-			-- 		"missing-fields",
-			-- 		"unused-function",
-			-- 		"unused-local",
-			-- 	},
-			-- },
 			format = {
 				enable = true,
 				defaultConfig = {
