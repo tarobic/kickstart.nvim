@@ -1,0 +1,6 @@
+syntax = "LuaJIT"
+column_width = 80
+indent_type = "Tabs"
+indent_width = 3
+call_parentheses = "None"
+collapse_simple_statement = "Never"
