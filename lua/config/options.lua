@@ -3,7 +3,7 @@ vim.g.have_nerd_font = true
 -- column/scrolling
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "auto"
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 10
 vim.o.cursorline = true
@@ -11,7 +11,7 @@ vim.o.cursorline = true
 -- Wrap
 vim.o.linebreak = true
 vim.o.breakindent = true
-vim.o.showbreak = "󰞘󰞘󰞘 "
+vim.o.showbreak = " 󰴏 "
 
 -- Misc
 vim.o.ignorecase = true
@@ -58,7 +58,12 @@ vim.o.foldlevelstart = 99
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 vim.o.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = {
+	tab = " ",
+	trail = "·",
+	extends = "",
+	nbsp = "␣",
+}
 
 -- Indentation
 vim.o.expandtab = false
@@ -76,35 +81,35 @@ vim.o.cindent = false
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd ("TextYankPost", {
+vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup (
+	group = vim.api.nvim_create_augroup(
 		"kickstart-highlight-yank",
 		{ clear = true }
 	),
-	callback = function ()
-		vim.hl.on_yank ()
+	callback = function()
+		vim.hl.on_yank()
 	end,
 })
 
 -- Show errors and warnings in a floating window
--- vim.api.nvim_create_autocmd("CursorHold", {
---    callback = function()
---       vim.diagnostic.open_float(nil, { focusable = false, source = "if_many" })
---    end,
--- })
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, { focusable = false, source = "all" })
+	end,
+})
 
 -- Start in insert mode when entering terminal buffer.
-vim.api.nvim_create_autocmd (
+vim.api.nvim_create_autocmd(
 	{ "TermOpen", "WinEnter" },
 	{ pattern = "term://*", command = "startinsert" }
 )
 
 -- Enable treesitter highlighting, indenting, and folding.
-vim.api.nvim_create_autocmd ("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "<filetype>" },
-	callback = function ()
-		vim.treesitter.start ()
+	callback = function()
+		vim.treesitter.start()
 		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end,
@@ -122,13 +127,13 @@ vim.api.nvim_create_autocmd ("FileType", {
 --     "toml",
 -- }
 ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-local progress = vim.defaulttable ()
-vim.api.nvim_create_autocmd ("LspProgress", {
+local progress = vim.defaulttable()
+vim.api.nvim_create_autocmd("LspProgress", {
 	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-	callback = function (ev)
-		local client = vim.lsp.get_client_by_id (ev.data.client_id)
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-		if not client or type (value) ~= "table" then
+		if not client or type(value) ~= "table" then
 			return
 		end
 		local p = progress[client.id]
@@ -137,10 +142,10 @@ vim.api.nvim_create_autocmd ("LspProgress", {
 			if i == #p + 1 or p[i].token == ev.data.params.token then
 				p[i] = {
 					token = ev.data.params.token,
-					msg = ("[%3d%%] %s%s"):format (
+					msg = ("[%3d%%] %s%s"):format(
 						value.kind == "end" and 100 or value.percentage or 100,
 						value.title or "",
-						value.message and (" **%s**"):format (value.message) or ""
+						value.message and (" **%s**"):format(value.message) or ""
 					),
 					done = value.kind == "end",
 				}
@@ -149,8 +154,8 @@ vim.api.nvim_create_autocmd ("LspProgress", {
 		end
 
 		local msg = {} ---@type string[]
-		progress[client.id] = vim.tbl_filter (function (v)
-			return table.insert (msg, v.msg) or not v.done
+		progress[client.id] = vim.tbl_filter(function(v)
+			return table.insert(msg, v.msg) or not v.done
 		end, p)
 
 		local spinner = {
@@ -165,12 +170,12 @@ vim.api.nvim_create_autocmd ("LspProgress", {
 			"⠇",
 			"⠏",
 		}
-		vim.notify (table.concat (msg, "\n"), "info", {
+		vim.notify(table.concat(msg, "\n"), "info", {
 			id = "lsp_progress",
 			title = client.name,
-			opts = function (notif)
+			opts = function(notif)
 				notif.icon = #progress[client.id] == 0 and " "
-					or spinner[math.floor (vim.uv.hrtime () / (1e6 * 80)) % #spinner + 1]
+					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
 			end,
 		})
 	end,
@@ -178,7 +183,7 @@ vim.api.nvim_create_autocmd ("LspProgress", {
 
 -- Diagnostic Config
 -- See :help vim.diagnostic.Opts
-vim.diagnostic.config  {
+vim.diagnostic.config {
 	severity_sort = true,
 	float = { border = "rounded", source = "if_many" },
 	underline = { severity = vim.diagnostic.severity.ERROR },
@@ -194,7 +199,7 @@ vim.diagnostic.config  {
 		-- source = "if_many",
 		source = true,
 		spacing = 2,
-		format = function (diagnostic)
+		format = function(diagnostic)
 			local diagnostic_message = {
 				[vim.diagnostic.severity.ERROR] = diagnostic.message,
 				[vim.diagnostic.severity.WARN] = diagnostic.message,

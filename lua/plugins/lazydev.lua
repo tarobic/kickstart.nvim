@@ -11,6 +11,10 @@ return {
 			-- { path = "snacks.nvim", words = { "Snacks" } },
 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 		},
+		integrations = {
+			lspconfig = false,
+			blink = true,
+		},
 	},
 	-- enabled = function ()
 	-- 	for dir in vim.fs.parents (vim.api.nvim_buf_get_name (0)) do

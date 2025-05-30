@@ -18,13 +18,13 @@ return { -- Autocompletion
 			ghost_text = { enabled = true },
 		},
 		sources = {
-			-- default = { "lsp", "path", "snippets", "buffer", "lazydev" },
-			-- providers = {
-			-- 	lazydev = {
-			-- 		module = "lazydev.integrations.blink",
-			-- 		score_offset = 100,
-			-- 	},
-			-- },
+			default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+			providers = {
+				lazydev = {
+					module = "lazydev.integrations.blink",
+					score_offset = 100,
+				},
+			},
 		},
 		snippets = { preset = "mini_snippets" },
 		fuzzy = { implementation = "prefer_rust_with_warning" },

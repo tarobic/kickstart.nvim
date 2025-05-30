@@ -15,18 +15,18 @@ return {
 	},
 	settings = {
 		Lua = {
-			completion = { callSnippet = "Replace", },
+			completion = { callSnippet = "Replace" },
 			diagnostics = {
-				globals = { "vim", "love" },
-				disable = {
-					"missing-parameters",
-					"missing-fields",
-					"unused-function",
-					"unused-local",
-				},
+				globals = { "vim", "love", "Snacks" },
+				-- disable = {
+				-- 	"missing-parameters",
+				-- 	"missing-fields",
+				-- 	"unused-function",
+				-- 	"unused-local",
+				-- },
 			},
 			format = {
-				enable = true,
+				enable = false,
 				defaultConfig = {
 					indent_style = "tabs",
 					indent_size = "3",
@@ -34,7 +34,7 @@ return {
 					quote_style = "double",
 					max_line_length = "80",
 					end_of_line = "auto",
-					auto_collapse_lines = "true",
+					auto_collapse_lines = "false",
 				},
 			},
 			hint = { enable = true },

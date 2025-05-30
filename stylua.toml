@@ -1,4 +1,4 @@
-syntax = "LuaJIT"
+syntax = "Lua51"
 column_width = 80
 indent_type = "Tabs"
 indent_width = 3
