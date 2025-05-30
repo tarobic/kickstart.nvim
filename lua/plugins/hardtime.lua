@@ -3,5 +3,7 @@ return {
 	-- enabled = false,
 	lazy = false,
 	dependencies = { "MunifTanjim/nui.nvim" },
-	opts = {},
+	opts = {
+		disable_mouse = false,
+	},
 }
