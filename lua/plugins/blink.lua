@@ -5,7 +5,7 @@ return { -- Autocompletion
 	version = "1.*",
 	dependencies = {
 		{ "echasnovski/mini.snippets" },
-		-- "folke/lazydev.nvim",
+		"folke/lazydev.nvim",
 	},
 	--- @module 'blink.cmp'
 	--- @type blink.cmp.Config
@@ -18,11 +18,13 @@ return { -- Autocompletion
 			ghost_text = { enabled = true },
 		},
 		sources = {
-			-- default = { "lsp", "path", "snippets", "lazydev" },
+			-- default = { "lsp", "path", "snippets", "buffer", "lazydev" },
 			-- providers = {
-			--     lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+			-- 	lazydev = {
+			-- 		module = "lazydev.integrations.blink",
+			-- 		score_offset = 100,
+			-- 	},
 			-- },
-			default = { "lsp", "path", "snippets", "buffer" },
 		},
 		snippets = { preset = "mini_snippets" },
 		fuzzy = { implementation = "prefer_rust_with_warning" },
