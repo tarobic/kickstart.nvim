@@ -26,5 +26,14 @@ return {
 	{
 		"vague2k/vague.nvim",
 		priority = 1000,
+		-- lua/plugins/rose-pine.lua
+	},
+	{
+		"rose-pine/neovim",
+		priority = 1000,
+		name = "rose-pine",
+		config = function ()
+			vim.cmd  "colorscheme rose-pine"
+		end,
 	},
 }
