@@ -19,25 +19,24 @@ return {
 				callSnippet = "Replace",
 				-- keywordSnippet = "Both",
 			},
-			diagnostics = {
-				disable = {
-					"missing-parameters",
-					"missing-fields",
-					"unused-function",
-					"unused-local",
-				},
-			},
+			-- diagnostics = {
+			-- 	disable = {
+			-- 		"missing-parameters",
+			-- 		"missing-fields",
+			-- 		"unused-function",
+			-- 		"unused-local",
+			-- 	},
+			-- },
 			format = {
-				enable = false,
+				enable = true,
 				defaultConfig = {
-					indent_style = "space",
+					indent_style = "tabs",
 					indent_size = "3",
 					tab_width = "3",
 					quote_style = "double",
 					max_line_length = "80",
 					end_of_line = "auto",
-					auto_collapse_lines = "false",
-					continuation_index = "5",
+					auto_collapse_lines = "true",
 				},
 			},
 			hint = { enable = true },

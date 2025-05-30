@@ -37,24 +37,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Auto-format ("lint") on save.
 		-- Usually not needed if server supports "textDocument/willSaveWaitUntil".
-		-- if
-		--     not client:supports_method "textDocument/willSaveWaitUntil"
-		--     and client:supports_method "textDocument/formatting"
-		-- then
-		--     vim.api.nvim_create_autocmd("BufWritePre", {
-		--         group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
-		--         buffer = args.buf,
-		--         callback = function()
-		--             vim.lsp.buf.format { bufnr = args.buf, id = client.id, timeout_ms = 1000 }
-		--         end,
-		--     })
-		-- end
+		if
+			 not client:supports_method "textDocument/willSaveWaitUntil"
+			 and client:supports_method "textDocument/formatting"
+		then
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.buf.format {
+						bufnr = args.buf,
+						id = client.id,
+						timeout_ms = 1000,
+					}
+				end,
+			})
+		end
 
 		-- Auto-format keymap
-		-- vim.keymap.set("n", "<leader>fo",
-		--     function() vim.lsp.buf.format({ async = true, bufnr = args.buf, id =
-		--         client.id }) end,
-		--     { buffer = args.buf, desc = "LSP: Format buffer" })
+		vim.keymap.set("n", "<leader>fo", function()
+			vim.lsp.buf.format {
+				async = true,
+				bufnr = args.buf,
+				id = client.id,
+			}
+		end, { buffer = args.buf, desc = "LSP: Format buffer" })
 
 		-- inlay hints
 		if client:supports_method "textDocument/inlayHint" then
@@ -63,14 +70,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Highlight word under cursor.
 		if
-			client
-			and client:supports_method(
-				vim.lsp.protocol.Methods.textDocument_documentHighlight,
-				args.buf
-			)
+			 client
+			 and client:supports_method(
+				 vim.lsp.protocol.Methods.textDocument_documentHighlight,
+				 args.buf
+			 )
 		then
 			local highlight_augroup =
-				vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+				 vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = args.buf,
 				group = highlight_augroup,
