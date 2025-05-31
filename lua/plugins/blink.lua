@@ -12,10 +12,36 @@ return { -- Autocompletion
 	opts = {
 		appearance = { nerd_font_variant = "mono" },
 		completion = {
-			-- documentation = { auto_show = true, auto_show_delay_ms = 500 },
 			documentation = { auto_show = true },
 			accept = { auto_brackets = { enabled = false } },
 			ghost_text = { enabled = true },
+			menu = {
+				draw = {
+					components = {
+						kind_icon = {
+							text = function(ctx)
+								local kind_icon, _, _ =
+									require("mini.icons").get("lsp", ctx.kind)
+								return kind_icon
+							end,
+							-- (optional) use highlights from mini.icons
+							highlight = function(ctx)
+								local _, hl, _ =
+									require("mini.icons").get("lsp", ctx.kind)
+								return hl
+							end,
+						},
+						kind = {
+							-- (optional) use highlights from mini.icons
+							highlight = function(ctx)
+								local _, hl, _ =
+									require("mini.icons").get("lsp", ctx.kind)
+								return hl
+							end,
+						},
+					},
+				},
+			},
 		},
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer", "lazydev" },

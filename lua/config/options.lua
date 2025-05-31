@@ -28,8 +28,7 @@ vim.o.updatetime = 250
 vim.o.clipboard = "unnamedplus"
 vim.o.virtualedit = "block"
 vim.o.termguicolors = true
--- Auto cd to directory for file in current buffer.
-vim.o.autochdir = false
+vim.o.autochdir = true
 vim.o.smoothscroll = true
 
 -- Netrw disable
@@ -211,3 +210,29 @@ vim.diagnostic.config {
 		current_line = true,
 	},
 }
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.o.formatoptions = "jql"
+	end,
+})
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+-- 	pattern = "*.lua",
+-- 	callback = function()
+-- 		vim.g.lazydev_enabled = vim.fs.parents()
+-- 	end,
+-- })
+
+if vim.g.lazydev_enabled == true then
+	vim.notify "lazydev blink enabled"
+	table.insert(require("blink").sources.default, "lazydev")
+	require("blink").sources.providers = {
+		lazydev = {
+			module = "lazydev.integrations.blink",
+			score_offset = 100,
+		},
+	}
+else
+	vim.notify "lazydev is disabled"
+end
