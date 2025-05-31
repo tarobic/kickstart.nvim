@@ -1,5 +1,3 @@
--- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/lua_ls.lua
-
 return {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
@@ -15,15 +13,14 @@ return {
 	},
 	settings = {
 		Lua = {
-			completion = { callSnippet = "Replace" },
+			completion = {
+				autoRequire = true,
+				callSnippet = "Replace",
+			},
 			diagnostics = {
 				globals = { "vim", "love", "Snacks" },
-				-- disable = {
-				-- 	"missing-parameters",
-				-- 	"missing-fields",
-				-- 	"unused-function",
-				-- 	"unused-local",
-				-- },
+				workspaceDelay = 1000,
+				workspaceEvent = "OnChange",
 			},
 			format = {
 				enable = false,
@@ -37,15 +34,16 @@ return {
 					auto_collapse_lines = "false",
 				},
 			},
-			hint = { enable = true },
-			-- runtime = {
-			-- version = "Lua 5.4",
-			-- version = "LuaJIT",
-			-- },
+			hint = {
+				enable = true,
+				setType = true,
+			},
+			type = {
+				inferParamType = true,
+			},
 			workspace = {
 				library = {
 					"${3rd}/love2d/library",
-					-- vim.fn.globpath(vim.o.runtimepath, "love2d/library"),
 				},
 			},
 		},

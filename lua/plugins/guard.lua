@@ -2,7 +2,7 @@ return {
 	"nvimdev/guard.nvim",
 	config = function()
 		local ft = require "guard.filetype"
-		ft("c"):fmt "clang-format"
+		ft("c"):fmt("clang-format"):lint "clang-tidy"
 
 		ft("lua"):fmt("stylua"):lint "selene"
 		vim.keymap.set(
@@ -60,5 +60,14 @@ return {
 		-- 		}
 		-- 	end
 		-- end)
+
+		vim.g.guard_config = {
+			fmt_on_save = true,
+			lsp_as_default_formatter = false,
+			save_on_fmt = false,
+			auto_lint = true,
+			lint_interval = 250,
+			refresh_diagnostic = true,
+		}
 	end,
 }
