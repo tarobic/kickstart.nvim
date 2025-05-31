@@ -20,7 +20,7 @@ return {
 			diagnostics = {
 				globals = { "vim", "love", "Snacks" },
 				workspaceDelay = 1000,
-				workspaceEvent = "OnChange",
+				-- workspaceEvent = "OnChange",
 			},
 			format = {
 				enable = false,
@@ -36,7 +36,7 @@ return {
 			},
 			hint = {
 				enable = true,
-				setType = true,
+				setType = false,
 			},
 			type = {
 				inferParamType = true,

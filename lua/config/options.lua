@@ -11,7 +11,7 @@ vim.o.cursorline = true
 -- Wrap
 vim.o.linebreak = true
 vim.o.breakindent = true
-vim.o.showbreak = " 󰴏 "
+vim.o.showbreak = " "
 
 -- Misc
 vim.o.ignorecase = true
@@ -211,28 +211,31 @@ vim.diagnostic.config {
 	},
 }
 
+-- Remove options that continue comment leader on new line.
+-- Run "verb set formatoptions" to see which file last set this
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		vim.o.formatoptions = "jql"
 	end,
 })
 
--- vim.api.nvim_create_autocmd("BufEnter", {
--- 	pattern = "*.lua",
--- 	callback = function()
--- 		vim.g.lazydev_enabled = vim.fs.parents()
--- 	end,
--- })
-
-if vim.g.lazydev_enabled == true then
-	vim.notify "lazydev blink enabled"
-	table.insert(require("blink").sources.default, "lazydev")
-	require("blink").sources.providers = {
-		lazydev = {
-			module = "lazydev.integrations.blink",
-			score_offset = 100,
-		},
-	}
-else
-	vim.notify "lazydev is disabled"
-end
+-- Toggle LazyDev depending on buffer directory.
+-- autochdir may affect this.
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.lua",
+	callback = function()
+		-- vim.notify "~~~~~~~~~~~"
+		for dir in vim.fs.parents(vim.api.nvim_buf_get_name(0)) do
+			-- vim.notify(dir)
+			for _, lazyDir in ipairs { ".config/nvim", "nvim_plugins" } do
+				if string.find(dir, lazyDir) then
+					vim.g.lazydev_enabled = true
+					-- vim.notify "lazydev enabled"
+					return
+				end
+			end
+		end
+		vim.g.lazydev_enabled = false
+		-- vim.notify "lazydev disabled"
+	end,
+})

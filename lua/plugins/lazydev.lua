@@ -16,15 +16,4 @@ return {
 			blink = true,
 		},
 	},
-	-- enabled = function ()
-	-- 	for dir in vim.fs.parents (vim.api.nvim_buf_get_name (0)) do
-	-- 		if vim.fs.dirname (dir) == "nvim" then
-	-- 			vim.notify  "✔️ config dir"
-	-- 			return true
-	-- 		end
-	-- 	end
-	--
-	-- 	vim.notify  "❌ config dir"
-	-- 	return false
-	-- end,
 }
