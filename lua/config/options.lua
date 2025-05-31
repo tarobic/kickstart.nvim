@@ -230,12 +230,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			for _, lazyDir in ipairs { ".config/nvim", "nvim_plugins" } do
 				if string.find(dir, lazyDir) then
 					vim.g.lazydev_enabled = true
-					-- vim.notify "lazydev enabled"
+					vim.g.lua_subversion = 1
 					return
 				end
 			end
 		end
 		vim.g.lazydev_enabled = false
-		-- vim.notify "lazydev disabled"
+		vim.lsp.config.lua = { runtime = { version = "Lua 5.4" } }
+		vim.g.lua_subversion = 4
 	end,
 })

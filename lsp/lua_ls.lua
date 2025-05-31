@@ -19,7 +19,7 @@ return {
 			},
 			diagnostics = {
 				globals = { "vim", "love", "Snacks" },
-				workspaceDelay = 1000,
+				-- workspaceDelay = 1000,
 				-- workspaceEvent = "OnChange",
 			},
 			format = {
