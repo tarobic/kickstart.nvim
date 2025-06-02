@@ -42,6 +42,7 @@ return {
 					indent = 2,
 					padding = 2,
 				},
+				{ section = "session" },
 				{ section = "startup" },
 			},
 		},
@@ -96,9 +97,9 @@ return {
 			desc = "Smart Find Files",
 		},
 		{
-			"<leader>,",
+			"<leader>bf",
 			function() Snacks.picker.buffers() end,
-			desc = "Buffers",
+			desc = "Find Buffers",
 		},
 		{
 			"<leader>/",
@@ -368,12 +369,12 @@ return {
 			desc = "Toggle Zoom",
 		},
 		{
-			"<leader>.",
+			"<leader>b.",
 			function() Snacks.scratch() end,
 			desc = "Toggle Scratch Buffer",
 		},
 		{
-			"<leader>S",
+			"<leader>bS",
 			function() Snacks.scratch.select() end,
 			desc = "Select Scratch Buffer",
 		},

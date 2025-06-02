@@ -54,10 +54,14 @@ return { -- Useful plugin to show you pending keybinds.
 
 		-- Document existing key chains
 		spec = {
-			{ "<leader>s", group = "[S]earch" },
-			{ "<leader>t", group = "[T]oggle" },
+			{ "<leader>s", group = "Search" },
+			{ "<leader>t", group = "Toggle" },
+			{ "<leader>b", group = "Buffer" },
+			{ "<leader>g", group = "Git" },
+			{ "<leader>f", group = "Find" },
+			{ "<leader>S", group = "Sessions" },
 			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
-			{ "<leader>w", proxy = "<C-w>", group = "windows" },
+			{ "<leader>w", proxy = "<C-w>", group = "Windows" },
 		},
 	},
 }

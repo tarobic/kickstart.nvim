@@ -3,11 +3,11 @@ return {
 	config = function()
 		local ft = require "guard.filetype"
 		ft("c"):fmt("clang-format"):lint "clang-tidy"
-
 		ft("lua"):fmt("stylua"):lint "selene"
+
 		vim.keymap.set(
 			{ "n", "v" },
-			"<leader>fo",
+			"<leader>F",
 			"<cmd>Guard fmt<cr>",
 			{ desc = "Format" }
 		)
