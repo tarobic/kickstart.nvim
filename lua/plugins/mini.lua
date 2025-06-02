@@ -10,22 +10,6 @@ return { -- Collection of various small independent plugins/modules
 		--  - ci'  - [C]hange [I]nside [']quote
 		require("mini.ai").setup { n_lines = 500 }
 
-		-- Add/delete/replace surroundings (brackets, quotes, etc.)
-		--
-		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-		-- - sd'   - [S]urround [D]elete [']quotes
-		-- - sr)'  - [S]urround [R]eplace [)] [']
-		require("mini.surround").setup()
-
-		local statusline = require "mini.statusline"
-		statusline.setup { use_icons = vim.g.have_nerd_font }
-
-		---@diagnostic disable-next-line: duplicate-set-field
-		statusline.section_location = function()
-			-- return '%2l:%-2v'
-			return "%2l:%-2v %P"
-		end
-
 		-- require("mini.indentscope").setup()
 		require("mini.icons").setup()
 
@@ -43,20 +27,24 @@ return { -- Collection of various small independent plugins/modules
 				markdown = true,
 			},
 		}
-
-		local gen_loader = require("mini.snippets").gen_loader
-		require("mini.snippets").setup {
-			snippets = {
-				-- Load custom file with global snippets first (adjust for Windows)
-				gen_loader.from_file "~/.config/nvim/snippets/global.json",
-
-				-- Load snippets based on current language by reading files from
-				-- "snippets/" subdirectories from 'runtimepath' directories.
-				gen_loader.from_lang(),
-			},
+		require("mini.sessions").setup {
+			directory = vim.fn.stdpath "state" .. "/sessions/",
 		}
 
-		-- require("mini.completion").setup()
-		require("mini.sessions").setup()
+		-- Add/delete/replace surroundings (brackets, quotes, etc.)
+		--
+		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+		-- - sd'   - [S]urround [D]elete [']quotes
+		-- - sr)'  - [S]urround [R]eplace [)] [']
+		require("mini.surround").setup()
+
+		local statusline = require "mini.statusline"
+		statusline.setup { use_icons = vim.g.have_nerd_font }
+
+		---@diagnostic disable-next-line: duplicate-set-field
+		statusline.section_location = function()
+			-- return '%2l:%-2v'
+			return "%2l:%-2v %P"
+		end
 	end,
 }

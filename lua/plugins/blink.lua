@@ -4,7 +4,9 @@ return { -- Autocompletion
 	event = "VimEnter",
 	version = "1.*",
 	dependencies = {
-		{ "echasnovski/mini.snippets" },
+		-- "echasnovski/mini.snippets",
+		{ "L3MON4D3/LuaSnip", version = "v2.*" },
+		"rafamadriz/friendly-snippets",
 		"folke/lazydev.nvim",
 	},
 	--- @module 'blink.cmp'
@@ -52,7 +54,7 @@ return { -- Autocompletion
 				},
 			},
 		},
-		snippets = { preset = "mini_snippets" },
+		snippets = { preset = "luasnip" },
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 		signature = { enabled = true },
 	},
