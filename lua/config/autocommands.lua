@@ -123,3 +123,30 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "help",
 	command = "wincmd H",
 })
+
+do
+	-- Mini.Git statusline
+	-- Use only HEAD name as summary string
+	local format_summary = function(data)
+		-- Utilize buffer-local table summary
+		local summary = vim.b[data.buf].minigit_summary
+		vim.b[data.buf].minigit_summary_string = summary.head_name or ""
+	end
+
+	local au_opts = { pattern = "MiniGitUpdated", callback = format_summary }
+	vim.api.nvim_create_autocmd("User", au_opts)
+end
+
+do
+	-- Mini.Diff statusline
+	local format_summary = function(data)
+		local summary = vim.b[data.buf].minidiff_summary
+		local t = {}
+		if summary.add > 0 then table.insert(t, "+" .. summary.add) end
+		if summary.change > 0 then table.insert(t, "~" .. summary.change) end
+		if summary.delete > 0 then table.insert(t, "-" .. summary.delete) end
+		vim.b[data.buf].minidiff_summary_string = table.concat(t, " ")
+	end
+	local au_opts = { pattern = "MiniDiffUpdated", callback = format_summary }
+	vim.api.nvim_create_autocmd("User", au_opts)
+end
