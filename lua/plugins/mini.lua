@@ -27,9 +27,6 @@ return { -- Collection of various small independent plugins/modules
 				markdown = true,
 			},
 		}
-		require("mini.sessions").setup {
-			directory = vim.fn.stdpath "state" .. "/sessions/",
-		}
 
 		-- Add/delete/replace surroundings (brackets, quotes, etc.)
 		--

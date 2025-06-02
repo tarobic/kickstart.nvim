@@ -109,3 +109,29 @@ vim.keymap.set("n", "<space>x", "<cmd>source % <CR>")
 vim.keymap.set("n", "<space>X", ":.lua<CR>")
 -- Execute selected lines.
 vim.keymap.set("v", "<space>X", ":lua<CR>")
+
+vim.keymap.set(
+	"n",
+	"<Leader>Sl",
+	function() require("persistence").load { last = true } end,
+	{ desc = "Load last session" }
+)
+vim.keymap.set(
+	"n",
+	"<Leader>Ss",
+	function() require("persistence").select() end,
+	{ desc = "Select session" }
+)
+vim.keymap.set(
+	"n",
+	"<Leader>Sq",
+	function() require("persistence").stop() end,
+	{ desc = "Don't save session (Stop persistence)" }
+)
+
+vim.keymap.set(
+	"n",
+	"<Leader>L",
+	function() require("lazy").home() end,
+	{ desc = "Lazy" }
+)
