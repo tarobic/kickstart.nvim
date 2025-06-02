@@ -3,7 +3,6 @@ return {
 	-- used for completion, annotations and signatures of Neovim apis
 	"folke/lazydev.nvim",
 	-- enabled = false,
-	-- TODO: disable when not in sub directory of nvim config.
 	ft = "lua",
 	opts = {
 		library = {

@@ -3,10 +3,10 @@ vim.g.have_nerd_font = true
 -- column/scrolling
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "auto"
+vim.o.signcolumn = "yes"
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 10
-vim.o.cursorline = true
+vim.o.cursorline = false
 
 -- Wrap
 vim.o.linebreak = true
@@ -23,7 +23,7 @@ vim.o.undofile = true
 -- This affects both:
 -- How long to wait between leader-w to show which-key menu.
 -- How quickly to press leader-e to toggle neotree while neotree is focused.
-vim.o.timeoutlen = 200
+vim.o.timeoutlen = 300
 vim.o.updatetime = 250
 vim.o.clipboard = "unnamedplus"
 vim.o.virtualedit = "block"
@@ -40,7 +40,7 @@ vim.o.smoothscroll = true
 
 -- Window
 vim.o.winborder = "rounded"
-vim.o.winblend = 15
+-- vim.o.winblend = 15
 
 -- Mouse
 vim.o.mouse = "a"
@@ -104,3 +104,22 @@ vim.diagnostic.config {
 	-- 	current_line = true,
 	-- },
 }
+
+-- Auto delete comments
+vim.api.nvim_create_user_command(
+	"DeleteComments",
+	function()
+		vim.cmd(
+			("'<,'>g/%s/d"):format(
+				vim.fn.escape(
+					vim.fn.substitute(vim.o.commentstring, "%s", "", "g"),
+					"/.*[]~"
+				)
+			)
+		)
+	end,
+	{
+		range = true,
+		desc = "Delete comments in the current buffer",
+	}
+)

@@ -35,18 +35,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end,
 })
--- require "nvim-treesitter".install {
---     "c_sharp",
---     "cpp",
---     "gdscript",
---     "gdshader",
---     "gitignore",
---     "glsl",
---     "python",
---     "regex",
---     "rust",
---     "toml",
--- }
 
 ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 local progress = vim.defaulttable()
