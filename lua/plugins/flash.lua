@@ -1,6 +1,6 @@
 return {
 	"folke/flash.nvim",
-	optional = true,
+	enabled = false,
 	specs = {
 		{
 			"folke/snacks.nvim",

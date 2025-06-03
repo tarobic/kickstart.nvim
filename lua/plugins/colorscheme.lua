@@ -46,5 +46,10 @@ return {
 		"scottmckendry/cyberdream.nvim",
 		lazy = false,
 		priority = 1000,
+		opts = {
+			variant = "auto",
+			transparent = true,
+			-- borderless_pickers = true,
+		},
 	},
 }

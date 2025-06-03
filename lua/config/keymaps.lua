@@ -104,11 +104,11 @@ vim.keymap.set("n", "gk", "<Up>")
 vim.keymap.set("n", "gj", "<Down>")
 
 -- Source current file.
-vim.keymap.set("n", "<space>x", "<cmd>source % <CR>")
+-- vim.keymap.set("n", "<space>x", "<cmd>source % <CR>")
 -- Execute current line.
-vim.keymap.set("n", "<space>X", ":.lua<CR>")
+-- vim.keymap.set("n", "<space>X", ":.lua<CR>")
 -- Execute selected lines.
-vim.keymap.set("v", "<space>X", ":lua<CR>")
+-- vim.keymap.set("v", "<space>X", ":lua<CR>")
 
 vim.keymap.set(
 	"n",
