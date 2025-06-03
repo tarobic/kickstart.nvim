@@ -173,8 +173,5 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function(params)
-		vim.g.SCHEME = params.match
-		vim.notify(vim.g.SCHEME)
-	end,
+	callback = function(params) vim.g.SCHEME = params.match end,
 })
