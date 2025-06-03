@@ -3,7 +3,7 @@ vim.g.have_nerd_font = true
 -- column/scrolling
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "auto:1-5"
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 10
 vim.o.cursorline = false
