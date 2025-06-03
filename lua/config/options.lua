@@ -3,10 +3,11 @@ vim.g.have_nerd_font = true
 -- column/scrolling
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "auto:1-5"
+vim.o.signcolumn = "yes:1"
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 10
 vim.o.cursorline = false
+-- vim.o.mousescroll = "ver:10,hor:6"
 
 -- Wrap
 vim.o.linebreak = true
@@ -30,13 +31,6 @@ vim.o.virtualedit = "block"
 vim.o.termguicolors = true
 vim.o.autochdir = true
 vim.o.smoothscroll = true
-
--- Netrw disable
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.g.loaded_netrwSettings = 1
--- vim.g.loaded_netrwFileHandlers = 1
--- vim.g.loaded_netrw_gitignore = 1
 
 -- Window
 vim.o.winborder = "rounded"
