@@ -27,14 +27,14 @@ vim.api.nvim_create_autocmd(
 )
 
 -- Enable treesitter highlighting, indenting, and folding.
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "<filetype>" },
-	callback = function()
-		vim.treesitter.start()
-		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = { "<filetype>" },
+-- 	callback = function()
+-- 		vim.treesitter.start()
+-- 		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- 	end,
+-- })
 
 -- ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 -- local progress = vim.defaulttable()
@@ -141,6 +141,7 @@ do
 	-- Mini.Diff statusline
 	local format_summary = function(data)
 		local summary = vim.b[data.buf].minidiff_summary
+		if summary == nil then return end
 		local t = {}
 		if summary.add > 0 then table.insert(t, "+" .. summary.add) end
 		if summary.change > 0 then table.insert(t, "~" .. summary.change) end
@@ -163,5 +164,17 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.wo.foldmethod = "expr"
 		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folds
 		vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" -- Use treesitter for indentation
+	end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	nested = true,
+	callback = function() vim.cmd.colorscheme(vim.g.SCHEME) end,
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function(params)
+		vim.g.SCHEME = params.match
+		vim.notify(vim.g.SCHEME)
 	end,
 })

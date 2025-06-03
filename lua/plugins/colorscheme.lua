@@ -1,7 +1,11 @@
+local function isDefaultScheme(name) return name == DefaultColorScheme end
+
 return {
 	{
 		"catppuccin/nvim",
-		priority = 1000,
+		name = "catppuccin",
+		lazy = isDefaultScheme "catppuccin",
+		priority = isDefaultScheme "catppuccin" and 1000 or 0,
 		transparent_background = true,
 		term_colors = true,
 		integrations = {
@@ -14,40 +18,38 @@ return {
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		priority = 1000,
+		name = "kanagawa",
+		lazy = isDefaultScheme "kanagawa",
+		priority = isDefaultScheme "kanagawa" and 1000 or 0,
 	},
 	{
 		"folke/tokyonight.nvim",
-		priority = 1000,
+		name = "tokyonight",
+		lazy = isDefaultScheme "tokyonight",
+		priority = isDefaultScheme "tokyonight" and 1000 or 0,
 		transparent = true,
 	},
 	{
 		"Mofiqul/dracula.nvim",
-		priority = 1000,
+		name = "dracula",
 	},
 	{
 		"vague2k/vague.nvim",
-		priority = 1000,
-		-- lua/plugins/rose-pine.lua
+		name = "vague",
 	},
 	{
 		"rose-pine/neovim",
-		priority = 1000,
 		name = "rose-pine",
-		config = function() vim.cmd "colorscheme rose-pine" end,
 	},
-	{ "abreujp/scholar.nvim" },
+	{ "abreujp/scholar.nvim", name = "scholar" },
 	{ "nuvic/flexoki-nvim", name = "flexoki" },
 	{
 		"bluz71/vim-moonfly-colors",
 		name = "moonfly",
-		lazy = false,
-		priority = 1000,
 	},
 	{
 		"scottmckendry/cyberdream.nvim",
-		lazy = false,
-		priority = 1000,
+		name = "cyberdream",
 		opts = {
 			variant = "auto",
 			transparent = true,
