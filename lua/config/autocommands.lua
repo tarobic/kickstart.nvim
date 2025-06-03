@@ -36,59 +36,59 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
----@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-local progress = vim.defaulttable()
-vim.api.nvim_create_autocmd("LspProgress", {
-	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-		if not client or type(value) ~= "table" then return end
-		local p = progress[client.id]
-
-		for i = 1, #p + 1 do
-			if i == #p + 1 or p[i].token == ev.data.params.token then
-				p[i] = {
-					token = ev.data.params.token,
-					msg = ("[%3d%%] %s%s"):format(
-						value.kind == "end" and 100 or value.percentage or 100,
-						value.title or "",
-						value.message and (" **%s**"):format(value.message) or ""
-					),
-					done = value.kind == "end",
-				}
-				break
-			end
-		end
-
-		local msg = {} ---@type string[]
-		progress[client.id] = vim.tbl_filter(
-			function(v) return table.insert(msg, v.msg) or not v.done end,
-			p
-		)
-
-		local spinner = {
-			"⠋",
-			"⠙",
-			"⠹",
-			"⠸",
-			"⠼",
-			"⠴",
-			"⠦",
-			"⠧",
-			"⠇",
-			"⠏",
-		}
-		vim.notify(table.concat(msg, "\n"), "info", {
-			id = "lsp_progress",
-			title = client.name,
-			opts = function(notif)
-				notif.icon = #progress[client.id] == 0 and " "
-					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-			end,
-		})
-	end,
-})
+-- ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+-- local progress = vim.defaulttable()
+-- vim.api.nvim_create_autocmd("LspProgress", {
+-- 	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+-- 	callback = function(ev)
+-- 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+-- 		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+-- 		if not client or type(value) ~= "table" then return end
+-- 		local p = progress[client.id]
+--
+-- 		for i = 1, #p + 1 do
+-- 			if i == #p + 1 or p[i].token == ev.data.params.token then
+-- 				p[i] = {
+-- 					token = ev.data.params.token,
+-- 					msg = ("[%3d%%] %s%s"):format(
+-- 						value.kind == "end" and 100 or value.percentage or 100,
+-- 						value.title or "",
+-- 						value.message and (" **%s**"):format(value.message) or ""
+-- 					),
+-- 					done = value.kind == "end",
+-- 				}
+-- 				break
+-- 			end
+-- 		end
+--
+-- 		local msg = {} ---@type string[]
+-- 		progress[client.id] = vim.tbl_filter(
+-- 			function(v) return table.insert(msg, v.msg) or not v.done end,
+-- 			p
+-- 		)
+--
+-- 		local spinner = {
+-- 			"⠋",
+-- 			"⠙",
+-- 			"⠹",
+-- 			"⠸",
+-- 			"⠼",
+-- 			"⠴",
+-- 			"⠦",
+-- 			"⠧",
+-- 			"⠇",
+-- 			"⠏",
+-- 		}
+-- 		vim.notify(table.concat(msg, "\n"), "info", {
+-- 			id = "lsp_progress",
+-- 			title = client.name,
+-- 			opts = function(notif)
+-- 				notif.icon = #progress[client.id] == 0 and " "
+-- 					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+-- 			end,
+-- 		})
+-- 	end,
+-- })
 
 -- Remove options that continue comment leader on new line.
 -- Run "verb set formatoptions" to see which file last set this
@@ -150,3 +150,18 @@ do
 	local au_opts = { pattern = "MiniDiffUpdated", callback = format_summary }
 	vim.api.nvim_create_autocmd("User", au_opts)
 end
+
+-- Only start treesitter if current filetype supports it. (Dashboard was throwing an error)
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(details)
+		local bufnr = details.buf
+		if not pcall(vim.treesitter.start, bufnr) then -- try to start treesitter which enables syntax highlighting
+			return -- Exit if treesitter was unable to start
+		end
+		vim.bo[bufnr].syntax = "on" -- Use regex based syntax-highlighting as fallback as some plugins might need it
+		vim.wo.foldlevel = 99
+		vim.wo.foldmethod = "expr"
+		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folds
+		vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" -- Use treesitter for indentation
+	end,
+})

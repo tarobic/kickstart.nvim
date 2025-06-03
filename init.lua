@@ -1,5 +1,5 @@
 require "config.keymaps"
 require "core.lsp"
 require "core.lazy"
-require "config.options"
 require "config.autocommands"
+require "config.options"
