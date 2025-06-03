@@ -22,9 +22,6 @@ return { -- Collection of various small independent plugins/modules
 		}
 
 		require("mini.surround").setup()
-		require("mini.statusline").setup {
-			use_icons = vim.g.have_nerd_font,
-			section_location = function() return "%2l:%-2v %P" end,
-		}
+		require("mini.statusline").setup { use_icons = vim.g.have_nerd_font }
 	end,
 }
