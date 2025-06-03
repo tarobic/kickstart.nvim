@@ -2,6 +2,15 @@ return {
 	{
 		"catppuccin/nvim",
 		priority = 1000,
+		transparent_background = true,
+		term_colors = true,
+		integrations = {
+			blink_cmp = true,
+			noice = true,
+			snacks = { enabled = true },
+			lsp_trouble = true,
+			which_key = true,
+		},
 	},
 	{
 		"rebelot/kanagawa.nvim",
@@ -10,14 +19,7 @@ return {
 	{
 		"folke/tokyonight.nvim",
 		priority = 1000,
-		-- config = function()
-		--   ---@diagnostic disable-next-line: missing-fields
-		--   require('tokyonight').setup {
-		--     styles = {
-		--       comments = { italic = false }, -- Disable italics in comments
-		--     },
-		--   }
-		-- end,
+		transparent = true,
 	},
 	{
 		"Mofiqul/dracula.nvim",
