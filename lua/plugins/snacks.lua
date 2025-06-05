@@ -83,7 +83,6 @@ return {
 		input = { enabled = true },
 		notifier = {
 			enabled = true,
-			timeout = 3000,
 			margin = { top = 2, right = 10, bottom = 1 },
 		},
 		picker = {
