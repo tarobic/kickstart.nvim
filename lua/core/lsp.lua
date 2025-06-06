@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		if client:supports_method "textDocument/implementation" then
-			map("grb", vim.lsp.buf.implementation, "List implementations")
+			map("gl", vim.lsp.buf.implementation, "List implementations")
 		end
 
 		-- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
