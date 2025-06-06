@@ -21,8 +21,8 @@ return {
 					padding = 2,
 				},
 				{
-					icon = "󰯠 ",
-					title = "Maintenance",
+					icon = " ",
+					title = "Bonus",
 					indent = 3,
 					padding = 2,
 					{
@@ -43,6 +43,18 @@ return {
 						desc = "Git",
 						action = ":lua Snacks.lazygit()",
 					},
+					{
+						icon = "󰌌 ",
+						key = "t",
+						desc = "Typr",
+						action = ":Typr",
+					},
+					{
+						icon = "󰄨 ",
+						key = "T",
+						desc = "Typr Stats",
+						action = ":TyprStats",
+					},
 				},
 				{
 					icon = " ",
@@ -62,6 +74,7 @@ return {
 				{
 					section = "terminal",
 					-- cmd = 'chafa -p off --speed=0.9 --clear --passthrough=tmux --scale max "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
+					cmd = "cmatrix",
 					indent = 12,
 					ttl = 0,
 					enabled = function()
@@ -70,7 +83,6 @@ return {
 					end,
 					height = 20,
 					padding = 1,
-					pane = 2,
 				},
 			},
 		},

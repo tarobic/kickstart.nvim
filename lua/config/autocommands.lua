@@ -166,6 +166,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function(params) vim.g.SCHEME = params.match end,
 })
 
+vim.api.nvim_create_autocmd(
+	"BufEnter",
+	{ pattern = "*.typr", callback = function() vim.b.completion = false end }
+)
+
 --FIXME
 -- Auto run file when saved
 local attach_to_buffer = function(output_bufnr, pattern, command)
