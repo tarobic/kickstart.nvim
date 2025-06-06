@@ -14,11 +14,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Show errors and warnings in a floating window
-vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		vim.diagnostic.open_float(nil, { focusable = false, source = "all" })
-	end,
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+-- 	callback = function()
+-- 		vim.diagnostic.open_float(nil, { focusable = false, source = "all" })
+-- 	end,
+-- })
 
 -- Start in insert mode when entering terminal buffer.
 vim.api.nvim_create_autocmd(
@@ -210,3 +210,31 @@ vim.api.nvim_create_user_command("AutoRun", function()
 	local command = vim.split(vim.fn.input "Command: ", " ")
 	attach_to_buffer(tonumber(bufnr), pattern, command)
 end, {})
+
+-- Auto trim on save
+local function canAutoFormat()
+	local au = vim.api.nvim_get_autocmds { group = "Guard", buffer = 0 }
+	return require("guard.filetype")[vim.bo.ft] and #au ~= 0
+end
+
+vim.api.nvim_create_autocmd("BufWrite", {
+	group = vim.api.nvim_create_augroup("TrimOnSave", { clear = true }),
+	callback = function()
+		if not canAutoFormat() then
+			require("mini.trailspace").trim()
+			require("mini.trailspace").trim_last_lines()
+		end
+	end,
+})
+
+local tryFormat = function()
+	if canAutoFormat() then
+		require("guard.format").do_fmt(vim.api.nvim_get_current_buf())
+	else
+		require("mini.trailspace").trim()
+		require("mini.trailspace").trim_last_lines()
+	end
+end
+
+-- format or trim trailing spaces
+vim.keymap.set({ "n", "v" }, "<leader>F", tryFormat, { desc = "Format" })

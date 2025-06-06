@@ -8,6 +8,7 @@ return { -- Collection of various small independent plugins/modules
 		require("mini.git").setup()
 		require("mini.icons").setup()
 		require("mini.move").setup()
+		-- require("mini.notify").setup()
 		require("mini.operators").setup()
 		require("mini.pairs").setup {
 			opts = {
@@ -24,7 +25,11 @@ return { -- Collection of various small independent plugins/modules
 			},
 		}
 
+		require("mini.splitjoin").setup { mappings = { toggle = "ms" } }
 		require("mini.surround").setup()
+		require("mini.starter").setup()
 		require("mini.statusline").setup { use_icons = vim.g.have_nerd_font }
+		require("mini.tabline").setup()
+		require("mini.trailspace").setup()
 	end,
 }
