@@ -16,6 +16,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			)
 		end
 
+		map("<leader>rr", vim.lsp.buf.rename, "Rename symbol under cursor", "n")
+
 		if client:supports_method "textDocument/implementation" then
 			map("gl", vim.lsp.buf.implementation, "List implementations")
 		end

@@ -1,9 +1,17 @@
 return {
 	"folke/which-key.nvim",
 	event = "VimEnter",
+	keys = {
+		{
+			"<leader>?",
+			function() require("which-key").show { global = false } end,
+			desc = "Buffer Local Keymaps (which-key)",
+		},
+	},
 	opts = {
-		delay = 0,
-		preset = "modern",
+		-- delay = 0,
+		delay = vim.g.timeoutlen,
+		preset = "helix",
 		icons = {
 			mappings = vim.g.have_nerd_font,
 			keys = vim.g.have_nerd_font and {} or {
@@ -46,7 +54,6 @@ return {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>f", group = "Find" },
 			{ "<leader>S", group = "Sessions" },
-			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
 			{ "<leader>w", proxy = "<C-w>", group = "Windows" },
 		},
 	},
