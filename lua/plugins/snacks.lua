@@ -10,7 +10,7 @@ return {
 		bigfile = { enabled = true },
 		bufdelete = { enabled = true },
 		dashboard = {
-			enabled = true,
+			enabled = false,
 			sections = {
 				{ section = "header" },
 				{
@@ -71,19 +71,19 @@ return {
 					padding = 2,
 				},
 				{ section = "startup" },
-				{
-					section = "terminal",
-					-- cmd = 'chafa -p off --speed=0.9 --clear --passthrough=tmux --scale max "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
-					cmd = "cmatrix",
-					indent = 12,
-					ttl = 0,
-					enabled = function()
-						return vim.fn.executable "chafa" == 1
-							and vim.fn.environ()["SSH_CLIENT"] == nil
-					end,
-					height = 20,
-					padding = 1,
-				},
+				-- {
+				-- 	section = "terminal",
+				-- 	-- cmd = 'chafa -p off --speed=0.9 --clear --passthrough=tmux --scale max "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
+				-- 	cmd = "cmatrix",
+				-- 	indent = 12,
+				-- 	ttl = 0,
+				-- 	enabled = function()
+				-- 		return vim.fn.executable "chafa" == 1
+				-- 			and vim.fn.environ()["SSH_CLIENT"] == nil
+				-- 	end,
+				-- 	height = 20,
+				-- 	padding = 1,
+				-- },
 			},
 		},
 		debug = { enabled = true },
@@ -429,7 +429,7 @@ return {
 			desc = "Delete Buffer",
 		},
 		{
-			"<leader>cR",
+			"<leader>rR",
 			function() Snacks.rename.rename_file() end,
 			desc = "Rename File",
 		},

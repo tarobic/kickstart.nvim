@@ -24,13 +24,16 @@ vim.o.undofile = true
 -- This affects both:
 -- How long to wait between leader-w to show which-key menu.
 -- How quickly to press leader-e to toggle neotree while neotree is focused.
-vim.o.timeoutlen = 250
-vim.o.updatetime = 250
+vim.o.timeoutlen = 500
+vim.o.updatetime = 500
+-- vim.o.timeoutlen = 250
+-- vim.o.updatetime = 250
 vim.o.clipboard = "unnamedplus"
 vim.o.virtualedit = "block"
 vim.o.termguicolors = true
 vim.o.autochdir = true
 vim.o.smoothscroll = true
+-- vim.o.cmdheight = 0
 
 -- Window
 vim.o.winborder = "rounded"
