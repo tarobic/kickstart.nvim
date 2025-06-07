@@ -39,7 +39,47 @@ return { -- Collection of various small independent plugins/modules
 		require("mini.splitjoin").setup { mappings = { toggle = "ms" } }
 
 		require("mini.surround").setup()
-		require("mini.starter").setup()
+
+		local starter = require "mini.starter"
+		starter.setup {
+			evaluate_single = true,
+			header = table.concat({
+				[[  /\ \▔\___  ___/\   /(●)_ __ ___  ]],
+				[[ /  \/ / _ \/ _ \ \ / / | '_ ` _ \ ]],
+				[[/ /\  /  __/ (_) \ V /| | | | | | |]],
+				[[\_\ \/ \___|\___/ \_/ |_|_| |_| |_|]],
+				[[───────────────────────────────────]],
+			}, "\n"),
+			footer = os.date(),
+			content_hooks = {
+				starter.gen_hook.adding_bullet(),
+				starter.gen_hook.aligning("center", "center"),
+			},
+			query_updaters = [[abcdefghilmoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMOQRSTUVWXYZ]],
+			items = {
+				{ action = "che", name = "Health", section = "Bonus" },
+				{ action = "Lazy", name = "Lazy", section = "Bonus" },
+				{
+					action = ":lua Snacks.picker.help()",
+					name = "h: Help",
+					section = "Bonus",
+				},
+				{
+					action = ":lua Snacks.lazygit()",
+					name = "Git",
+					section = "Bonus",
+				},
+				{ action = ":Typr", name = "Typr", section = "Bonus" },
+				{ action = ":TyprStats", name = "Typr Stats", section = "Bonus" },
+				starter.sections.recent_files(5, false, true),
+				starter.sections.recent_files(5, true, false),
+				--TODO: setup mini sessions and picker
+				-- starter.sections.sessions(),
+				-- starter.sections.pick(),
+				starter.sections.builtin_actions(),
+			},
+		}
+
 		require("mini.statusline").setup { use_icons = vim.g.have_nerd_font }
 		-- require("mini.tabline").setup()
 		require("mini.trailspace").setup()
