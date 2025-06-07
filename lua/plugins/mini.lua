@@ -2,7 +2,18 @@ return { -- Collection of various small independent plugins/modules
 	"echasnovski/mini.nvim",
 	version = false,
 	config = function()
-		require("mini.ai").setup()
+		local ai = require "mini.ai"
+		ai.setup {
+			custom_textobjects = {
+				-- Lua block
+				s = { "%[%[().-()%]%]" },
+				-- Function definition
+				F = ai.gen_spec.treesitter {
+					a = "@function.outer",
+					i = "@function.inner",
+				},
+			},
+		}
 		require("mini.comment").setup()
 		require("mini.diff").setup()
 		require("mini.git").setup()
@@ -26,10 +37,11 @@ return { -- Collection of various small independent plugins/modules
 		}
 
 		require("mini.splitjoin").setup { mappings = { toggle = "ms" } }
+
 		require("mini.surround").setup()
 		require("mini.starter").setup()
 		require("mini.statusline").setup { use_icons = vim.g.have_nerd_font }
-		require("mini.tabline").setup()
+		-- require("mini.tabline").setup()
 		require("mini.trailspace").setup()
 	end,
 }
