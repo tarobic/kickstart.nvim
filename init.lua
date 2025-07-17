@@ -166,6 +166,14 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+--#region mine
+vim.o.virtualedit = "block"
+vim.o.smoothscroll = true
+vim.o.winborder = "rounded"
+vim.o.winblend = 15
+--vim.o.cmdheight = 0
+--#endregion
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -194,11 +202,10 @@ vim.keymap.set(
 	{ desc = "Exit terminal mode" }
 )
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+--#region mine
+vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Window" })
+vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close buffer" })
+--#endregion
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -251,6 +258,83 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+
+--#region mine
+-- Start in insert mode when entering terminal buffer.
+vim.api.nvim_create_autocmd(
+	{ "TermOpen", "WinEnter" },
+	{ pattern = "term://*", command = "startinsert" }
+)
+
+---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+local progress = vim.defaulttable()
+vim.api.nvim_create_autocmd("LspProgress", {
+	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+		if not client or type(value) ~= "table" then
+			return
+		end
+		local p = progress[client.id]
+
+		for i = 1, #p + 1 do
+			if i == #p + 1 or p[i].token == ev.data.params.token then
+				p[i] = {
+					token = ev.data.params.token,
+					msg = ("[%3d%%] %s%s"):format(
+						value.kind == "end" and 100 or value.percentage or 100,
+						value.title or "",
+						value.message and (" **%s**"):format(value.message) or ""
+					),
+					done = value.kind == "end",
+				}
+				break
+			end
+		end
+
+		local msg = {} ---@type string[]
+		progress[client.id] = vim.tbl_filter(function(v)
+			return table.insert(msg, v.msg) or not v.done
+		end, p)
+
+		local spinner = {
+			"⠋",
+			"⠙",
+			"⠹",
+			"⠸",
+			"⠼",
+			"⠴",
+			"⠦",
+			"⠧",
+			"⠇",
+			"⠏",
+		}
+		vim.notify(table.concat(msg, "\n"), "info", {
+			id = "lsp_progress",
+			title = client.name,
+			opts = function(notif)
+				notif.icon = #progress[client.id] == 0 and " "
+					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+			end,
+		})
+	end,
+})
+
+-- Remove options that continue comment leader on new line.
+-- Run "verb set formatoptions" to see which file last set this
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.o.formatoptions = "jql"
+	end,
+})
+
+-- Auto split help windows vertically.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "help",
+	command = "wincmd H",
+})
+--#endregion
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -1194,8 +1278,8 @@ require("lazy").setup({
 	--    This is the easiest way to modularize your config.
 	--
 	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-	-- { import = 'custom.plugins' },
-	--
+	{ import = "custom.plugins" },
+
 	-- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
 	-- Or use telescope!
 	-- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
