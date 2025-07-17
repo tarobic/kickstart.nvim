@@ -171,7 +171,16 @@ vim.o.virtualedit = "block"
 vim.o.smoothscroll = true
 vim.o.winborder = "rounded"
 vim.o.winblend = 15
---vim.o.cmdheight = 0
+vim.o.cmdheight = 0
+-- Indentation
+vim.o.expandtab = false
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.smarttab = true
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.cindent = false
 --#endregion
 
 -- [[ Basic Keymaps ]]
@@ -266,61 +275,6 @@ vim.api.nvim_create_autocmd(
 	{ pattern = "term://*", command = "startinsert" }
 )
 
----@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-local progress = vim.defaulttable()
-vim.api.nvim_create_autocmd("LspProgress", {
-	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-		if not client or type(value) ~= "table" then
-			return
-		end
-		local p = progress[client.id]
-
-		for i = 1, #p + 1 do
-			if i == #p + 1 or p[i].token == ev.data.params.token then
-				p[i] = {
-					token = ev.data.params.token,
-					msg = ("[%3d%%] %s%s"):format(
-						value.kind == "end" and 100 or value.percentage or 100,
-						value.title or "",
-						value.message and (" **%s**"):format(value.message) or ""
-					),
-					done = value.kind == "end",
-				}
-				break
-			end
-		end
-
-		local msg = {} ---@type string[]
-		progress[client.id] = vim.tbl_filter(function(v)
-			return table.insert(msg, v.msg) or not v.done
-		end, p)
-
-		local spinner = {
-			"⠋",
-			"⠙",
-			"⠹",
-			"⠸",
-			"⠼",
-			"⠴",
-			"⠦",
-			"⠧",
-			"⠇",
-			"⠏",
-		}
-		vim.notify(table.concat(msg, "\n"), "info", {
-			id = "lsp_progress",
-			title = client.name,
-			opts = function(notif)
-				notif.icon = #progress[client.id] == 0 and " "
-					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-			end,
-		})
-	end,
-})
-
 -- Remove options that continue comment leader on new line.
 -- Run "verb set formatoptions" to see which file last set this
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -371,7 +325,7 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
+	--"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
@@ -658,7 +612,15 @@ require("lazy").setup({
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			-- Mason must be loaded before its dependents so we need to set it up here.
 			-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-			{ "mason-org/mason.nvim", opts = {} },
+			{
+				"mason-org/mason.nvim",
+				opts = {
+					registries = {
+						"github:mason-org/mason-registry",
+						"github:Crashdummyy/mason-registry",
+					},
+				},
+			},
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
@@ -1229,6 +1191,7 @@ require("lazy").setup({
 				"markdown_inline",
 				"python",
 				"query",
+				"regex",
 				"rust",
 				"toml",
 				"vim",
@@ -1305,6 +1268,3 @@ require("lazy").setup({
 		},
 	},
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
