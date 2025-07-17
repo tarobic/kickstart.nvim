@@ -171,7 +171,7 @@ vim.o.virtualedit = "block"
 vim.o.smoothscroll = true
 vim.o.winborder = "rounded"
 vim.o.winblend = 15
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 -- Indentation
 vim.o.expandtab = false
 vim.o.tabstop = 4
@@ -898,7 +898,7 @@ require("lazy").setup({
 								callSnippet = "Replace",
 							},
 							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
+							diagnostics = { disable = { "missing-fields" } },
 						},
 					},
 				},
@@ -1066,11 +1066,18 @@ require("lazy").setup({
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets", "lazydev" },
+				default = { "lsp", "easy-dotnet", "path", "snippets", "lazydev" },
 				providers = {
 					lazydev = {
 						module = "lazydev.integrations.blink",
 						score_offset = 100,
+					},
+					["easy-dotnet"] = {
+						name = "easy-dotnet",
+						enabled = true,
+						module = "easy-dotnet.completion.blink",
+						score_offset = 10000,
+						async = true,
 					},
 				},
 			},
@@ -1265,6 +1272,21 @@ require("lazy").setup({
 			start = "🚀",
 			task = "📌",
 			lazy = "💤 ",
+		},
+	},
+})
+
+vim.lsp.config("roslyn", {
+	on_attach = function()
+		print "This will run when the server attaches!"
+	end,
+	settings = {
+		["csharp|inlay_hints"] = {
+			csharp_enable_inlay_hints_for_implicit_object_creation = true,
+			csharp_enable_inlay_hints_for_implicit_variable_types = true,
+		},
+		["csharp|code_lens"] = {
+			dotnet_enable_references_code_lens = true,
 		},
 	},
 })
