@@ -23,7 +23,12 @@ return {
 	enabled = true,
 	dependencies = {
 		-- Creates a beautiful debugger UI
-		"rcarriga/nvim-dap-ui",
+		{
+			"rcarriga/nvim-dap-ui",
+			config = function()
+				require("dapui").setup()
+			end,
+		},
 
 		-- Required dependency for nvim-dap-ui
 		"nvim-neotest/nvim-nio",
@@ -128,6 +133,30 @@ return {
 				command = "netcoredbg",
 				args = { "--interpreter=vscode" },
 			}
+		end
+
+		-- Change breakpoint icons
+		vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
+		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
+		local breakpoint_icons = vim.g.have_nerd_font
+				and {
+					Breakpoint = "",
+					BreakpointCondition = "",
+					BreakpointRejected = "",
+					LogPoint = "",
+					Stopped = "",
+				}
+			or {
+				Breakpoint = "●",
+				BreakpointCondition = "⊜",
+				BreakpointRejected = "⊘",
+				LogPoint = "◆",
+				Stopped = "⭔",
+			}
+		for type, icon in pairs(breakpoint_icons) do
+			local tp = "Dap" .. type
+			local hl = (type == "Stopped") and "DapStop" or "DapBreak"
+			vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
 		end
 	end,
 }
